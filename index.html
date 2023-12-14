@@ -43,15 +43,24 @@
 
     <!-- Form Section -->
     <div class="container mt-4">
+
+        <!-- Instructions Toggle Button -->
+        <div class="container text-center my-4">
+            <button id="instructionsToggle" class="btn light-gray">Show Instructions</button>
+        </div>
+
+        <!-- Instructions Content (Initially Hidden) -->
+        <div id="instructionsContent" class="container text-center my-4 hide">
+            <p>Here are the instructions...</p>
+        </div>
         <div class="progress mb-3">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                aria-valuemax="100">Step 1</div>
+            <div class="progress-bar dark-gray" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Step 1</div>
         </div>
         <form id="name-form">
             <div id="form-group">
                 <label for="title">Name</label>
                 <input type="text" id="nameInput" class="form-control" required>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn light-gray">Submit</button>
             </div>
             <!-- <div class="form-group">
                     <label for="budgetInput">Gift Budget (€):</label>
