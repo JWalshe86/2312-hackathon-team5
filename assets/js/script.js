@@ -5,40 +5,53 @@
 // If you want to refer to that code again, just go back into commit history. It isn't lost forever. :- )
 // But I don't think it is needed.
 
-const gifts = [
-  "Bag of coal",
-  "Big boi cat teddy",
-  "Shrek 1 on DVD",
-  "Rubber chicken",
-  "Propeller hat",
-  "A pack of ham",
-  "Chicken leg socks",
-  "Banana costume",
-  "A turkey hat"
-];
-
-document
-  .getElementById("name-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    // Name input from user
-    const nameInput = document.getElementById("nameInput");
-    const name = nameInput.value;
-
-    // Math function to randomly generate gift
-    const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
-
-    // Results displayed into a table row, inserted into the HTML
-    const tableBody = document.getElementById("name-list");
-    const row = document.createElement("tr");
-    row.innerHTML = `
-        <td>${name}</td>
-        <td>${randomGift}</td>
-        <td></td>
-      `;
-    tableBody.appendChild(row);
-
-    // Clears the name input value so as to not repeat default behaviour
-    nameInput.value = "";
+  document.addEventListener("DOMContentLoaded", () => {
+    // Array of gifts
+    const gifts = [
+      "Bag of coal",
+      "Big boi cat teddy",
+      "Shrek 1 on DVD",
+      "Rubber chicken",
+      "Propeller hat",
+      "A pack of ham",
+      "Chicken leg socks",
+      "Banana costume",
+      "A turkey hat"
+    ];
+  
+    // Form submission handling function
+    document.getElementById("name-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+  
+      // Name input from user
+      const nameInput = document.getElementById("nameInput");
+      const name = nameInput.value;
+  
+      // Math function to randomly generate gift
+      const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
+  
+      // Results displayed into a table row, inserted into the HTML
+      const tableBody = document.getElementById("name-list");
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${name}</td><td>${randomGift}</td><td></td>`;
+      tableBody.appendChild(row);
+  
+     // Clears the name input value so as to not repeat default behaviour
+      nameInput.value = "";
+    });
+  
+    // Added by Yuliia: 
+    // This section of the code was added by me to implement the show/hide instructions functionality.
+    // I had to encapsulate all the code under a single 'DOMContentLoaded' event listener for the newly 
+    // added functionality to work properly.
+    
+    // Function for showing/hiding instructions
+    const instructionsButton = document.getElementById('instructionsToggle');
+    const instructionsContent = document.getElementById('instructionsContent');
+  
+    instructionsButton.addEventListener('click', () => {
+      instructionsContent.classList.toggle('hide');
+      instructionsButton.textContent = instructionsContent.classList.contains('hide') ? 'Show Instructions' : 'Hide Instructions';
+    });
   });
+  
