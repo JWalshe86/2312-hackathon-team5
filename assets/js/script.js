@@ -1,76 +1,34 @@
+// New code below here from "keiron" branch
+
+// I deleted previous code as there was complex stuff that was preventing the array from being randomised.
+// I decided it was best to start again with simpler, modular code.
+// If you want to refer to that code again, just go back into commit history. It isn't lost forever. :- )
+// But I don't think it is needed.
+
 const gifts = ["coal", "chocolates", "flowers", "giftcard", "hat", "socks"];
-const giftCount = gifts.length;
 
-// Generate random gift
+document
+  .getElementById("name-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
 
-const GenerateGift = function (){
-    for (let i = 0; i < giftCount; i++) {
-        const randomIndex = Math.floor(Math.random()* gifts.length);
-        const gift = gifts[randomIndex];
-    
-        return gift;
-    }    
+    // Name input from user
+    const nameInput = document.getElementById("nameInput");
+    const name = nameInput.value;
 
-}
+    // Math function to randomly generate gift
+    const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
 
-let giftGenerated = GenerateGift();
+    // Results displayed into a table row, inserted into the HTML
+    const tableBody = document.getElementById("name-list");
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${randomGift}</td>
+        <td></td>
+      `;
+    tableBody.appendChild(row);
 
-// Name Class: Represents a Name
-class Name {
-    constructor(title){
-        this.title = title;
-    }
-}
-
-// UI Class: Handle UI Tasks
-
-class UI {
-    static displayNames() {
-    
-        names.forEach(name=> UI.addNameToList(name));
-
-    }
-
-    static addNameToList(name){
-        const list = document.querySelector('#name-list');
-
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-            <td>${name.title}</td>
-            <td>${giftGenerated}</td>
-        `;
-
-        list.appendChild(row);
-    }
-
-    static clearFields() {
-        document.querySelector('#nameInput').value = '';
-    }
-}
-
-// Store Class: Handles Storage
-
-// Event: Display Names
-document.addEventListener('DOMContentLoaded', UI.displayNames);
-
-// Event: Add a Name
-document.querySelector('#name-form').addEventListener('submit',
-(e)=> {
-// Prevent actual submit 
-e.preventDefault();
-
-// Get form values
-const title = document.querySelector('#nameInput').value;
-
-// Instatiate name
-const name = new Name(title);
-
-// Add name to UI
-UI.addNameToList(name);
-
-// Clear fields
-UI.clearFields()
-
-});
-
+    // Clears the name input value so as to not repeat default behaviour
+    nameInput.value = "";
+  });
