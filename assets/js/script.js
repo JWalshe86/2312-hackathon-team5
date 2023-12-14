@@ -5,7 +5,17 @@
 // If you want to refer to that code again, just go back into commit history. It isn't lost forever. :- )
 // But I don't think it is needed.
 
-const gifts = ["coal", "chocolates", "flowers", "giftcard", "hat", "socks"];
+const gifts = [
+  "Bag of coal",
+  "Big boi cat teddy",
+  "Shrek 1 on DVD",
+  "Rubber chicken",
+  "Propeller hat",
+  "A pack of ham",
+  "Chicken leg socks",
+  "Banana costume",
+  "A turkey hat"
+];
 
 document
   .getElementById("name-form")
