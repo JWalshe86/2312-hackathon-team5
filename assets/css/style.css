@@ -1,15 +1,15 @@
 /* Form Section Styles */
 .container.mt-4 {
-    max-width: 800px; /* Узкая ширина */
-    margin: auto; /* Центрирование */
+    max-width: 800px; 
+    margin: auto; 
 }
 
 /* Main Content Styles */
 .container-fluid.py-5 {
-    text-align: center; /* Центрирование текста */
+    text-align: center;
 }
 .container-fluid.py-5 {
-    font-size: 1rem; /* Унифицированный меньший размер шрифта для всего текста */
+    font-size: 1rem; 
 }
 .container-fluid.py-5 p {
     text-align: center;
@@ -17,7 +17,35 @@
 
 /* Social Media Links Styles */
 .container.text-center.my-4 a {
-    font-size: 2rem; /* Увеличение размера иконок */
-    color: inherit; /* Удаление цвета по умолчанию */
-    text-decoration: none; /* Удаление подчеркивания */
+    font-size: 2rem; 
+    color: inherit; 
+    text-decoration: none; 
+}
+
+/* About Us Section Styles */
+.container.mt-5 {
+    max-width: 1000px;  
+    margin: auto;  
+}
+
+/* Mission and Team Section Styles */
+#mission, #team {
+    text-align: center;  
+}
+
+#mission h3, #team h3 {
+    font-size: 1.5rem;  
+}
+
+#mission p, #team p {
+    font-size: 1rem;  
+}
+
+#team ul {
+    list-style-type: none;  
+    padding-left: 0;  
+}
+
+#team ul li {
+    margin-bottom: 10px;  
 }
