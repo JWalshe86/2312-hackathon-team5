@@ -1,9 +1,23 @@
-.jumbotron {
-    background-color: #fff; 
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-    border-radius: .3rem;
+/* Form Section Styles */
+.container.mt-4 {
+    max-width: 800px; /* Узкая ширина */
+    margin: auto; /* Центрирование */
 }
-  
 
-  
+/* Main Content Styles */
+.container-fluid.py-5 {
+    text-align: center; /* Центрирование текста */
+}
+.container-fluid.py-5 {
+    font-size: 1rem; /* Унифицированный меньший размер шрифта для всего текста */
+}
+.container-fluid.py-5 p {
+    text-align: center;
+}
+
+/* Social Media Links Styles */
+.container.text-center.my-4 a {
+    font-size: 2rem; /* Увеличение размера иконок */
+    color: inherit; /* Удаление цвета по умолчанию */
+    text-decoration: none; /* Удаление подчеркивания */
+}
