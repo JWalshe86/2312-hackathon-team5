@@ -145,13 +145,221 @@ h1{
 
 /* About section stying */
 
-.teamMembers a{
-    position: relative;
-    text-decoration: none;
-
-}
 
 .teamMembers img {
     border-radius: 50%;
     height: 5em;
+    position: absolute;
+    
 }
+
+.keiron{
+    z-index: 13;
+    bottom: 14rem;
+}
+
+.Yullia{
+    z-index: 13;
+    bottom: 3rem;
+    right: 14rem;
+}
+
+.john{
+    z-index: 13;
+    bottom: 12rem;
+    right: 12rem;
+}
+
+.alan{
+    z-index: 13;
+    bottom: 3rem;
+    right: 5rem;
+}
+
+
+:root{
+
+    --color-bg : radial-gradient( circle farthest-corner at 50.4% 50.5%,
+    rgba(57, 181, 51, 1) 0%, rgba(35, 91, 32,1)90%);
+
+    --color-tree-back : linear-gradient( to left , rgb(1, 59, 1), rgb(13, 244, 90), rgb(1, 59, 1));
+
+    --color-tree-front : linear-gradient( to left , rgb(0, 175, 0),rgb(14,24,23), rgb(0, 175, 0));
+
+    --color-star-dark : rgb(255, 166, 0);
+
+    --color-star-light : linear-gradient(109.6deg, rgba(255,219,47,1)
+    11.2%, rgba(244,253,0,1)100.2%)
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+
+    background-image: var(--color-bg);
+    animation: bg-animation 6s ease infinite;
+}
+
+@keyframes bg-animation{
+
+    0%,100%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+}
+
+.container {
+    width: 20rem;
+    position: relative;
+}
+
+.star{
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: var(--color-star-dark);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%,2% 35%, 39% 35%);
+    position: absolute;
+    left: 52%;
+    top: 0;
+    transform: translate(-50%, -70%);
+    z-index: 12;
+    animation: rotate 4s linear infinite;
+}
+
+.star::after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 3.5rem;
+    height:  3.5rem;
+    background-image: var(--color-star-light);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%,2% 35%, 39% 35%);
+}
+
+@keyframes rotate{
+    100%{
+        transform: translate(-50%, -70%) rotate(360deg);
+    }
+}
+
+.tree{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#tree{
+    margin-top: 15%;
+}
+
+.tree > div{
+    height: 3rem;
+    background-image: var(--color-tree-back);
+    position: relative;
+    clip-path: polygon(0 40%, 100% 0, 100% 60%, 0% 100%);
+    z-index: 11;
+    margin-top: -1.6rem;
+}
+
+.tree > div:nth-of-type(even){
+    background-image: var(--color-tree-front);
+    clip-path: polygon(0 0%,100% 40%,100% 100%, 0 60%);
+    margin-top: -1.6rem;
+    transform: rotate(2deg);
+    position: relative;
+    z-index: 1;
+    margin-left: 1rem;
+}
+
+.tree > div:nth-of-type(1){
+    width: 4rem;
+    height: 5rem;
+    clip-path: polygon(60% 0, 100% 50%, 100% 50%, 0 100%, 0 60%);
+}
+.tree > div:nth-of-type(2){
+    width: 5rem;
+}
+.tree > div:nth-of-type(3){
+    width: 6rem;
+}
+.tree > div:nth-of-type(4){
+    width: 7rem;
+}
+.tree > div:nth-of-type(5){
+    width: 8rem;
+}
+.tree > div:nth-of-type(6){
+    width: 9rem;
+}
+.tree > div:nth-of-type(7){
+    width: 10rem;
+}
+.tree > div:nth-of-type(8){
+    width: 11rem;
+}
+.tree > div:nth-of-type(9){
+    width: 12rem;
+}
+.tree > div:nth-of-type(10){
+    width: 13rem;
+}
+.tree > div:nth-of-type(11){
+    width: 14rem;
+}
+.tree > div:nth-of-type(12){
+    width: 15rem;
+}
+.tree > div:nth-of-type(13){
+    width: 16rem;
+}
+.tree > div:nth-of-type(14){
+    width: 17rem;
+}
+.tree > div:nth-of-type(15){
+    width: 14rem;
+    height: 2rem;
+    margin-left: 4rem;
+    clip-path: polygon(100% 3%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.base{
+    width: 5rem;
+    height: 2rem;
+    background-image: var(--color-star-light);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+    position: relative;
+    left: 52%;
+    bottom: 0;
+    transform: translate(-50%);
+}
+.shadow{
+    width: 12rem;
+    height: 2rem;
+    background-color: rgba(0,0,0,.4);
+    border-radius: 50%;
+    position: relative;
+    filter: blur(6px);
+    left: 52%;
+    bottom: 5px;
+    transform: translate(-50%);
+
+}
+
+
+
+
+
+
+
+
+
+
