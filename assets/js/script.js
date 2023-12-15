@@ -72,6 +72,14 @@
 
   function nextStep() {
     const totalSteps = 3;
+
+    const userInput = document.getElementById('nameInput').value.trim();
+
+    if (userInput === '') {
+      alert("Please enter a name.");
+      return;
+    }
+
     currentStep++;
 
     if (currentStep > totalSteps) {
