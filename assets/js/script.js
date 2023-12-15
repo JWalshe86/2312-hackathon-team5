@@ -64,4 +64,35 @@
       instructionsButton.textContent = instructionsContent.classList.contains('hide') ? 'Show Instructions' : 'Hide Instructions';
     });
   });
+
+  // "keiron" branch : progress bar status
+
+  let currentStep = 1;
+  const progressBar = document.getElementById('progress-bar');
+
+  function nextStep() {
+    const totalSteps = 3;
+
+    // Lines 76-82 check if input from user is empty
+    const userInput = document.getElementById('nameInput').value.trim();
+
+    if (userInput === '') {
+      alert("Please enter a name.");
+      return;
+    }
+
+    // Increases totalSteps count by +1
+    currentStep++;
+
+    if (currentStep > totalSteps) {
+      currentStep = 1;
+    }
+
+    const nextWidth = ((currentStep) / totalSteps) * 100;
+
+    // Dynamically changes the <div> associated with the progress bar
+    progressBar.querySelector('.progress-bar').style.width = `${nextWidth}%`;
+    progressBar.querySelector('.progress-bar').setAttribute('aria-valuenow', nextWidth);
+    progressBar.querySelector('.progress-bar').textContent = `Step ${currentStep}`;
+  };
   
