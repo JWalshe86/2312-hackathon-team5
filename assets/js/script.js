@@ -64,4 +64,24 @@
       instructionsButton.textContent = instructionsContent.classList.contains('hide') ? 'Show Instructions' : 'Hide Instructions';
     });
   });
+
+  // "keiron" branch : progress bar status
+
+  let currentStep = 1;
+  const progressBar = document.getElementById('progress-bar');
+
+  function nextStep() {
+    const totalSteps = 3;
+    currentStep++;
+
+    if (currentStep > totalSteps) {
+      currentStep = 1;
+    }
+
+    const nextWidth = ((currentStep) / totalSteps) * 100;
+
+    progressBar.querySelector('.progress-bar').style.width = `${nextWidth}%`;
+    progressBar.querySelector('.progress-bar').setAttribute('aria-valuenow', nextWidth);
+    progressBar.querySelector('.progress-bar').textContent = `Step ${currentStep}`;
+  };
   
