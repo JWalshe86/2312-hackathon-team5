@@ -1,3 +1,11 @@
+/* Navbar */
+.navbar img {
+    max-width: 60px;
+    height: auto;
+    display: block;
+    margin: auto; 
+  }
+
 /* Form Section Styles */
 .container.mt-4 {
     max-width: 800px;
