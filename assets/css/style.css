@@ -120,20 +120,22 @@ h1{
     position: absolute;
     width: 100%;
     height:100%;
+} 
+
+.naughty{
+    background-color: rgba(0,0,0,.5);
 }
 
-.container-fluid.py-5{
+.about{
     background-color: rgba(0,0,0,.5);
 }
 
 .container.mt-4, #teamMembers{
     text-shadow: none;
     font-weight: bold;
-}
+} 
 
-#teamMembers{
-    background-color: rgba(0,0,0,.5);
-}
+
 
 @media (max-width: 768px){
     h1{
@@ -143,5 +145,13 @@ h1{
 
 /* About section stying */
 
-img { float: left; }
-.follow { line-height: 19px; }
+.teamMembers a{
+    position: relative;
+    text-decoration: none;
+
+}
+
+.teamMembers img {
+    border-radius: 50%;
+    height: 5em;
+}
