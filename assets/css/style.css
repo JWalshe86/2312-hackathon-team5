@@ -4,6 +4,15 @@
     margin: auto;
 }
 
+/* Gift Image */
+
+.image-container {
+    max-width: 100%; 
+    max-height: 300px; 
+    margin: 0 auto; 
+    overflow: hidden;
+}
+
 /* Main Content Styles */
 .container-fluid.py-5 {
     text-align: center;
