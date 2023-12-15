@@ -73,6 +73,7 @@
   function nextStep() {
     const totalSteps = 3;
 
+    // Lines 76-82 check if input from user is empty
     const userInput = document.getElementById('nameInput').value.trim();
 
     if (userInput === '') {
@@ -80,6 +81,7 @@
       return;
     }
 
+    // Increases totalSteps count by +1
     currentStep++;
 
     if (currentStep > totalSteps) {
@@ -88,6 +90,7 @@
 
     const nextWidth = ((currentStep) / totalSteps) * 100;
 
+    // Dynamically changes the <div> associated with the progress bar
     progressBar.querySelector('.progress-bar').style.width = `${nextWidth}%`;
     progressBar.querySelector('.progress-bar').setAttribute('aria-valuenow', nextWidth);
     progressBar.querySelector('.progress-bar').textContent = `Step ${currentStep}`;
