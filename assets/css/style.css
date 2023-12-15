@@ -108,8 +108,13 @@ h1{
     background-color: rgba(0,0,0,.5);
 }
 
-.container.mt-4{
+.container.mt-4, #teamMembers{
     text-shadow: none;
+    font-weight: bold;
+}
+
+#teamMembers{
+    background-color: rgba(0,0,0,.5);
 }
 
 @media (max-width: 768px){
