@@ -61,23 +61,27 @@
     display: none;
 }
 
-/* Custom light gray color */
-.light-gray {
-    background-color: #d6d8db;
-    border-color: #d6d8db;
+
+/* Results section */
+#resultsSection .card {
+    margin-bottom: 10px;
+}
+  
+#resultsSection .card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+  
+#resultsSection .card-body {
+    background-color: #e9ecef;
+}
+ 
+.card, .card-header, .card-body {
+    border-width: 0 !important;  
 }
 
-.light-gray:hover {
-    background-color: #bfc1c3;
-    border-color: #bfc1c3;
+#name-form button[type="submit"] {
+    margin-top: 15px;
 }
 
-/* progress bar */
-.progress-bar.light-gray {
-    background-color: #d6d8db;
-}
 
-/* Custom dark gray color for progress bar */
-.progress-bar.dark-gray {
-    background-color: #343a40;
-}
