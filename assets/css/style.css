@@ -122,3 +122,8 @@ h1{
         font-size: calc(1.525rem + 3.3vw);
     }  
 }
+
+/* About section stying */
+
+img { float: left; }
+.follow { line-height: 19px; }
