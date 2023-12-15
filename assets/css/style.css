@@ -1,9 +1,87 @@
-.jumbotron {
-    background-color: #fff; 
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-    border-radius: .3rem;
+/* Form Section Styles */
+.container.mt-4 {
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Main Content Styles */
+.container-fluid.py-5 {
+    text-align: center;
+}
+
+.container-fluid.py-5 {
+    font-size: 1rem;
+}
+
+.container-fluid.py-5 p {
+    text-align: center;
+}
+
+/* Social Media Links Styles */
+.container.text-center.my-4 a {
+    font-size: 2rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* About Us Section Styles */
+.container.mt-5 {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Mission and Team Section Styles */
+#mission,
+#team {
+    text-align: center;
+}
+
+#mission h3,
+#team h3 {
+    font-size: 1.5rem;
+}
+
+#mission p,
+#team p {
+    font-size: 1rem;
+}
+
+#team ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#team ul li {
+    margin-bottom: 10px;
+}
+
+/* Instruction section */
+
+.hide {
+    display: none;
+}
+
+
+/* Results section */
+#resultsSection .card {
+    margin-bottom: 10px;
 }
   
-
+#resultsSection .card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
   
+#resultsSection .card-body {
+    background-color: #e9ecef;
+}
+ 
+.card, .card-header, .card-body {
+    border-width: 0 !important;  
+}
+
+#name-form button[type="submit"] {
+    margin-top: 15px;
+}
+
+
