@@ -35,21 +35,18 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Have you been naughty or nice this year?</h1>
-            <p class="col-md-12 fs-4">Read the instructions and fill the form to begin...</p>
-        </div>
-    </div>
-
-    <!-- Form Section -->
+    <div class="masthead" style="background-image: url(/assets/images/background-img.jpg);">
+        <div class="color-overlay d-flex justify-content-center align-items-center">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Have you been naughty or nice this year?</h1>
+                <p class="col-md-12 fs-4">Read the instructions and fill the form to begin...</p>
+                <!-- Instructions Toggle Button -->
+                <div class="container text-center my-4">
+                    <button id="instructionsToggle" class="btn btn-success">Show Instructions</button>
+                </div>
+                    <!-- Form Section -->
     <div class="container mt-4">
 
-        <!-- Instructions Toggle Button -->
-        <div class="container text-center my-4">
-            <button id="instructionsToggle" class="btn btn-success">Show Instructions</button>
-        </div>
 
         <!-- Instructions Content (Initially Hidden) -->
         <div id="instructionsContent" class="container text-center my-4 hide">
@@ -76,13 +73,17 @@
                     <label for="participantsInput">Number of Participants:</label>
                     <input type="number" class="form-control" id="participantsInput" placeholder="Enter the number of participants">
                 </div> -->
-        </form>
-    </div>
-
-    <!-- Results section -->
+                <!-- Results section -->
     <div class="container mt-4" id="resultsSection">
         <div id="name-list" class="row"></div>
     </div>
+        </form>
+    </div>
+            </div>
+        </div>
+    </div>
+
+    
 
 
     <!-- Social Media Links -->
