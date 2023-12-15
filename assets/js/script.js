@@ -31,10 +31,20 @@
       const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
   
       // Results displayed into a table row, inserted into the HTML
-      const tableBody = document.getElementById("name-list");
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${name}</td><td>${randomGift}</td><td></td>`;
-      tableBody.appendChild(row);
+      //const tableBody = document.getElementById("name-list");
+      //const row = document.createElement("tr");
+      //row.innerHTML = `<td>${name}</td><td>${randomGift}</td><td></td>`;
+      //tableBody.appendChild(row);
+
+      //Results displayed into card 
+      const resultsSection = document.getElementById("name-list");
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <div class="card-header">${name}</div>
+        <div class="card-body">${randomGift}</div>
+      `;
+      resultsSection.appendChild(card);
   
      // Clears the name input value so as to not repeat default behaviour
       nameInput.value = "";
