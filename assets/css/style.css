@@ -366,7 +366,7 @@ body{
 
 /* cursor */
 
-.cursor {
+#cursor {
     width: 20px;
     height: 20px;
     border: 1px solid rgb(246, 239, 239);
@@ -379,7 +379,7 @@ body{
     z-index: 14;
 }
 
-.cursor::after {
+#cursor::after {
     content: "";
     width: 20px;
     height: 20px;
