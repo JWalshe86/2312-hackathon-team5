@@ -152,7 +152,7 @@ function handleStep3() {
   giftImage.style.display = "none";
   nextButton.style.display = "none";
   giftMessage.innerHTML = `Here you go! Here is your shopping voucher: 
-      <a href="path-to-your-voucher.pdf" target="_blank">Download Voucher</a>`;
+      <a href="./assets/images/voucher-template.png" target="_blank">Download Voucher</a>`;
 }
 
 // Snowfall effect
