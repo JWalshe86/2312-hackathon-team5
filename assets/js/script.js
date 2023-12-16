@@ -1,28 +1,41 @@
 // Array of gifts
 const gifts = [
-  "Bag of coal",
-  "Big boi cat teddy",
+  "bag of coal",
+  "Big-boi cat teddy",
   "Shrek 1 on DVD",
   "Rubber chicken",
   "Propeller hat",
-  "A pack of ham",
-  "Chicken leg socks",
-  "Banana costume",
-  "A turkey hat",
+  "pack of ham",
+  "chicken leg socks",
+  "banana costume",
+  "turkey hat",
 ];
 
 // Images stored as variables associated with gift name
 const images = {
-  "Bag of coal": "./assets/images/bag of coal.jpg",
-  "Big boi cat teddy": "./assets/images/big cat teddy.webp",
+  "bag of coal": "./assets/images/bag of coal.jpg",
+  "Big-boi cat teddy": "./assets/images/big cat teddy.webp",
   "Shrek 1 on DVD": "./assets/images/shrek dvd.jpg",
   "Rubber chicken": "./assets/images/rubber chicken.jpg",
   "Propeller hat": "./assets/images/propeller hat.webp",
-  "A pack of ham": "./assets/images/pack of ham.jpg",
-  "Chicken leg socks": "./assets/images/chicken leg socks.webp",
-  "Banana costume": "./assets/images/banana costume.jpg",
-  "A turkey hat": "./assets/images/turkey hat.jpg"
+  "pack of ham": "./assets/images/pack of ham.jpg",
+  "chicken leg socks": "./assets/images/chicken leg socks.webp",
+  "banana costume": "./assets/images/banana costume.jpg",
+  "turkey hat": "./assets/images/turkey hat.jpg"
 };
+
+// "keiron" branch : 
+
+let currentStep = 1;
+const instructionsButton = document.getElementById("instructionsToggle");
+const progressBar = document.getElementById("progress-bar");
+const participantsCheckbox = document.getElementById("participants-checkbox");
+const formGroup = document.getElementById("form-group");
+const submitButton = document.getElementById("submit-button");
+const giftInterface = document.getElementById("gift-interface");
+const giftMessage = document.getElementById("gift-message");
+const nextButton = document.getElementById("next-button");
+const giftImage = document.getElementById("gift-image");
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -76,16 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// "keiron" branch : 
-
-let currentStep = 1;
-const progressBar = document.getElementById("progress-bar");
-const formGroup = document.getElementById("form-group");
-const giftInterface = document.getElementById("gift-interface");
-const giftMessage = document.getElementById("gift-message");
-const nextButton = document.getElementById("next-button");
-const giftImage = document.getElementById("gift-image");
-
 function nextStep() {
   const totalSteps = 3;
   // Takes name value to pass down function
@@ -134,9 +137,12 @@ function updateProgressBar(width) {
 function handleStep2(userInput, randomGift) {
   console.log(userInput, randomGift);
   formGroup.style.display = "none";
+  instructionsButton.style.display = "none";
+  participantsCheckbox.style.display = "none";
+  submitButton.style.display = "none";
   giftInterface.style.display = "block";
   giftImage.style.display = "block";
-  giftMessage.textContent = `${userInput} has been gifted this ${randomGift}!`;
+  giftMessage.textContent = `Get ready ${userInput}! You're getting a ${randomGift}!`;
   giftImage.src = images[randomGift] || ""; // This piece of code is beautiful fr
 }
 
