@@ -97,6 +97,11 @@ function nextStep() {
     return;
   }
 
+  // Stops step count going beyond "Step 3"
+  if (currentStep === 3) {
+    return;
+  }
+
   // Math function to randomly generate gift
   const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
   console.log(randomGift);
