@@ -41,9 +41,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add add-name button listener
   document.getElementById('add-name').addEventListener('click', addNameField);
-  // Function for adding new name input fields
+  let nameFieldCount = 2;
+
   function addNameField() {
-  } 
+    const nameInputsContainer = document.getElementById('form-group');// Container for input fields
+
+    // Create a new div element for the input field
+    const newInputDiv = document.createElement('div');
+    newInputDiv.classList.add('mb-3'); // Добавление отступа
+
+    // Create a new input field
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.id = `nameInput${nameFieldCount}`;
+    newInput.classList.add('form-control');
+    newInput.placeholder = `Name #${nameFieldCount}`; // Add a tooltip
+
+    // Add a new input field to the div
+    newInputDiv.appendChild(newInput);
+
+    // Adding a div to the container
+    nameInputsContainer.appendChild(newInputDiv);
+
+    //Increase the counter for the next field
+    nameFieldCount++;
+  }
+
+  // Event handler for the checkbox
+  document.getElementById('multipleParticipantsCheckbox').addEventListener('change', function() {
+    if (this.checked) {
+      // Show the button
+      document.getElementById("add-name").classList.remove("d-none");
+    } else {
+      // Hide the button
+      document.getElementById("add-name").classList.add("d-none");
+      removeAdditionalNameFields();
+    }
+  });
   
   // Form submission handling function
   document

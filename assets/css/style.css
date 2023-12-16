@@ -22,6 +22,9 @@
 }
 
 /* Main Content Styles */
+.main-content {
+    flex: 1;
+}
 .container-fluid.py-5 {
     text-align: center;
 }
@@ -78,24 +81,6 @@
     display: none;
 }
 
-
-/* Results section */
-#resultsSection .card {
-    margin-bottom: 10px;
-}
-  
-#resultsSection .card-header {
-    background-color: #f8f9fa;
-    font-weight: bold;
-}
-  
-#resultsSection .card-body {
-    background-color: #e9ecef;
-}
- 
-.card, .card-header, .card-body {
-    border-width: 0 !important;  
-}
 
 #name-form button[type="submit"] {
     margin-top: 15px;
@@ -218,7 +203,9 @@ h1{
 }
 
 body{
-
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-image: var(--color-bg);
     animation: bg-animation 6s ease infinite;
 }
