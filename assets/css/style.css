@@ -6,6 +6,10 @@
     margin: auto; 
   }
 
+.nav-link {
+    font-family: 'Taviraj', serif;
+}
+
 /* Form Section Styles */
 .container.mt-4 {
     max-width: 800px;
@@ -59,6 +63,7 @@
 #mission h3,
 #team h3 {
     font-size: 1.5rem;
+    font-family: 'Taviraj', serif;
 }
 
 #mission p,
@@ -120,6 +125,7 @@
 
 h1{
     font-size: 4rem;
+    font-family: 'Mountains of Christmas', serif;
 }
 
 .color-overlay{
@@ -209,6 +215,10 @@ body{
     min-height: 100vh;
     background-image: var(--color-bg);
     animation: bg-animation 6s ease infinite;
+}
+
+p {
+    font-family: 'Taviraj', serif;
 }
 
 @keyframes bg-animation{
