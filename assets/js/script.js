@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Event handler for the checkbox
-  document.getElementById('multipleParticipantsCheckbox').addEventListener('change', function() {
+  document.getElementById('multipleParticipantsCheckbox').addEventListener('change', function () {
     if (this.checked) {
       // Show the button
       document.getElementById("add-name").classList.remove("d-none");
@@ -78,14 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
       removeAdditionalNameFields();
     }
   });
-  
+
   // Form submission handling function
   document
     .getElementById("name-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
       document.getElementById("add-name").classList.remove("hidden");
-      
+
       // Name input from user
       const nameInput = document.getElementById("nameInput");
       const name = nameInput.value;
@@ -152,17 +152,32 @@ function updateProgressBar(width) {
   progressBarElement.textContent = `Step ${currentStep}`;
 }
 
-// The interface on "Step 2"
-function handleStep2(userInput, randomGift) {
-  console.log(userInput, randomGift);
+function handleStep2() {
   formGroup.style.display = "none";
   instructionsButton.style.display = "none";
   participantsCheckbox.style.display = "none";
   submitButton.style.display = "none";
+
   giftInterface.style.display = "block";
-  giftImage.style.display = "block";
-  giftMessage.textContent = `Oh boy! Looks like ${userInput}'s getting ${randomGift}!`;
-  giftImage.src = images[randomGift] || ""; // This piece of code is beautiful fr
+
+  const names = [];
+  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
+    if (input.value.trim() !== '') {
+      names.push(input.value.trim());
+    }
+  });
+
+  names.forEach(name => {
+    const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
+    const giftImageUrl = images[randomGift] || "";
+    const cardDiv = document.createElement('div');
+    cardDiv.innerHTML = `
+      <h3>${name}</h3>
+      <p>Gift: ${randomGift}</p>
+      <img src="${giftImageUrl}" alt="${randomGift}" class="gift-image">
+    `;
+    giftInterface.appendChild(cardDiv);
+  });
 }
 
 // The interface on "Step 3"
@@ -176,9 +191,9 @@ function handleStep3() {
 
 // Snowfall effect
 $(document).snowfall({
-  flakeCount : 200,   // number of snowflakes
-  minSize    : 1,     // min size of snowflake, 1px by default
-  maxSize    : 4,     // max size of snowflake, 3px by default
-  minSpeed   : 1,     // min speed of snowflake, 1 by default
-  maxSpeed   : 3      // max speed of snowflake, 5 by default
+  flakeCount: 200,   // number of snowflakes
+  minSize: 1,     // min size of snowflake, 1px by default
+  maxSize: 4,     // max size of snowflake, 3px by default
+  minSpeed: 1,     // min speed of snowflake, 1 by default
+  maxSpeed: 3      // max speed of snowflake, 5 by default
 });
