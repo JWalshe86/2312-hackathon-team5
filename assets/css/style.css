@@ -101,6 +101,10 @@
     margin-top: 15px;
 }
 
+.label-spacing {
+    margin-left: -30px;
+}
+
 /* Gift interface form CSS ("keiron" branch) */
 
 .hidden {

@@ -57,7 +57,7 @@
                         <div class="progress-bar bg-success" role="progressbar" style="width: 33%;" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100">Step 1</div>
                     </div>
-                    <form id="name-form">
+                    <form class="text-center" id="name-form">
                             <!-- Name input form -->
                         <div id="form-group">
                             <label for="title" class="mb-2">Name</label>
@@ -65,13 +65,13 @@
                         </div>
                         <!-- Checkbox for multiple names -->
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" id="multipleParticipantsCheckbox">
-                            <label class="form-check-label" for="multipleParticipantsCheckbox">
+                            <input class="mx-1 form-check-input" type="checkbox" id="multipleParticipantsCheckbox">
+                            <label class="form-check-label label-spacing" for="multipleParticipantsCheckbox">
                                 Add multiple participants
                             </label>
                         </div>
-                        <button onclick="nextStep()" type="submit" class="btn btn-success">Submit</button>
-                        </div>
+                        <!-- Submit button -->
+                        <button onclick="nextStep()" type="submit" class="btn btn-success mb-3">Submit</button>
                         <!-- Hidden Add Another Name button-->
                         <button id="add-name" type="button" class="btn btn-success d-none">Add Another Name</button>
                         <!-- Hidden gift-interface -->
