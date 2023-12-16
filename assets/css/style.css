@@ -100,11 +100,12 @@
     text-align: center;
 }
 
-#gift-image {
-    max-width: 50%;
-    height: auto;
-    display: none;
-    border-radius: 30%;
+.gift-image {
+    max-width: 100px;  
+    height: auto;  
+    display: block;  
+    margin: 10px auto;  
+    border-radius: 10px;
 }
 
 
