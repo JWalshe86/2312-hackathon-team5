@@ -38,19 +38,19 @@
     </nav>
 
     <div class="masthead" style="background-image: url(./assets/images/background-img.jpg);">
+        <div class="text-center">
+            <h1 class="display-5 fw-bold pt-4">Ready to gift your naughty ones with oddities?</h1>
+            <p class="col-md-12 fs-4">Click the instructions button to know more...</p>
+        </div>
         <div class="color-overlay d-flex justify-content-center align-items-center">
-            <div class="container-fluid py-5 naughty">
-                <h1 class="display-5 fw-bold">Have you been naughty or nice this year?</h1>
-                <p class="col-md-12 fs-4">Read the instructions and fill the form to begin...</p>
-
-                <!-- Instructions Toggle Button -->
-                <div class="container text-center my-4">
+            <div class="container-fluid py-4 naughty">
+                <div class="container text-center my-3">
                     <button id="instructionsToggle" class="btn btn-success">Show Instructions</button>
                 </div>
                 <!-- Form Section -->
                 <div class="container mt-4">
                     <!-- Instructions Content (Initially Hidden) -->
-                    <div id="instructionsContent" class="container text-center my-4 hide">
+                    <div id="instructionsContent" class="container text-center hide">
                         <p>Here are the instructions...</p>
                     </div>
                     <div class="progress mb-3" id="progress-bar">
@@ -60,10 +60,11 @@
                     <form id="name-form">
                             <!-- Name input form -->
                         <div id="form-group">
-                            <label for="title">Name</label>
+                            <label for="title" class="mb-2">Name</label>
                             <input type="text" id="nameInput" class="form-control" required>
+                        </div>
                         <!-- Checkbox for multiple names -->
-                        <div class="form-check">
+                        <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" id="multipleParticipantsCheckbox">
                             <label class="form-check-label" for="multipleParticipantsCheckbox">
                                 Add multiple participants
