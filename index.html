@@ -38,48 +38,49 @@
     </nav>
 
     <div class="masthead" style="background-image: url(./assets/images/background-img.jpg);">
+        <div class="text-center">
+            <h1 class="display-5 fw-bold pt-4">Ready to gift your naughty ones with oddities?</h1>
+            <p class="col-md-12 fs-4">Click the instructions button to know more...</p>
+        </div>
         <div class="color-overlay d-flex justify-content-center align-items-center">
-            <div class="container-fluid py-5 naughty">
-                <h1 class="display-5 fw-bold">Have you been naughty or nice this year?</h1>
-                <p class="col-md-12 fs-4">Read the instructions and fill the form to begin...</p>
-
-                <!-- Instructions Toggle Button -->
-                <div class="container text-center my-4">
+            <div class="container-fluid py-4 naughty">
+                <div class="container text-center my-3">
                     <button id="instructionsToggle" class="btn btn-success">Show Instructions</button>
                 </div>
                 <!-- Form Section -->
                 <div class="container mt-4">
                     <!-- Instructions Content (Initially Hidden) -->
-                    <div id="instructionsContent" class="container text-center my-4 hide">
+                    <div id="instructionsContent" class="container text-center hide">
                         <p>Here are the instructions...</p>
                     </div>
                     <div class="progress mb-3" id="progress-bar">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 33%;" aria-valuenow="33"
                             aria-valuemin="0" aria-valuemax="100">Step 1</div>
                     </div>
-                    <form id="name-form">
+                    <form class="text-center" id="name-form">
+                            <!-- Name input form -->
+                        <div id="form-group">
+                            <label for="title" class="mb-2">Name your victim...</label>
+                            <input type="text" id="nameInput" class="form-control" required>
+                        </div>
                         <!-- Checkbox for multiple names -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="multipleParticipantsCheckbox">
-                            <label class="form-check-label" for="multipleParticipantsCheckbox">
+                        <div class="form-check mt-3" id="participants-checkbox">
+                            <input class="mx-1 form-check-input" type="checkbox" id="multipleParticipantsCheckbox">
+                            <label class="form-check-label label-spacing" for="multipleParticipantsCheckbox">
                                 Add multiple participants
                             </label>
                         </div>
-                        <!-- Name input form -->
-                        <div id="form-group">
-                            <input type="text" id="nameInput" class="form-control mb-3" placeholder="Name #1" required>
-                            <!-- Hidden Add Another Name button-->
-                            <div class="mb-3">
-                                <button id="add-name" type="button" class="btn btn-success d-none">Add Another Name</button>
-                            </div>
-                            <div>
-                                <button onclick="nextStep()" type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </div>
+                        <!-- Submit button -->
+                        <button onclick="nextStep()" type="submit" class="btn btn-success mb-3" id="submit-button">Submit</button>
+                        <!-- Hidden Add Another Name button-->
+                        <button id="add-name" type="button" class="btn btn-success d-none">Add Another Name</button>
                         <!-- Hidden gift-interface -->
                         <div id="gift-interface" class="gift-interface hidden">
-                            <img src="#" alt="Gift" id="gift-image" class="image-container mb-1">
+                            <!-- Gift description -->
                             <p id="gift-message"></p>
+                            <!-- Gift image -->
+                            <img src="#" alt="Gift" id="gift-image" class="image-container mb-1">
+                            <!-- Next button -->
                             <button onclick="nextStep()" type="submit" class="btn btn-success"
                                 id="next-button">Next</button>
                         </div>
