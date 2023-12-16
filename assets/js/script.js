@@ -147,3 +147,12 @@ function handleStep3() {
   giftMessage.innerHTML = `Here you go! Here is your shopping voucher: 
       <a href="path-to-your-voucher.pdf" target="_blank">Download Voucher</a>`;
 }
+
+// Snowfall effect
+$(document).snowfall({
+  flakeCount : 200,   // number of snowflakes
+  minSize    : 1,     // min size of snowflake, 1px by default
+  maxSize    : 4,     // max size of snowflake, 3px by default
+  minSpeed   : 1,     // min speed of snowflake, 1 by default
+  maxSpeed   : 3      // max speed of snowflake, 5 by default
+});
