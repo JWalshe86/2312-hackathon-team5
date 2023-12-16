@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let nameFieldCount = 2;
 
   function addNameField() {
-    const nameInputsContainer = document.getElementById('form-group');// Container for input fields
+    const nameInputsContainer = document.getElementById('additional-names');// Container for input fields
 
     // Create a new div element for the input field
     const newInputDiv = document.createElement('div');
