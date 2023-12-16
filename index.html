@@ -58,21 +58,24 @@
                             aria-valuemin="0" aria-valuemax="100">Step 1</div>
                     </div>
                     <form id="name-form">
+                        <!-- Checkbox for multiple names -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="multipleParticipantsCheckbox">
+                            <label class="form-check-label" for="multipleParticipantsCheckbox">
+                                Add multiple participants
+                            </label>
+                        </div>
                         <!-- Name input form -->
                         <div id="form-group">
-                            <label for="title">Name</label>
-                            <input type="text" id="nameInput" class="form-control" required>
-                            <!-- Checkbox for multiple names -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="multipleParticipantsCheckbox">
-                                <label class="form-check-label" for="multipleParticipantsCheckbox">
-                                    Add multiple participants
-                                </label>
+                            <input type="text" id="nameInput" class="form-control mb-3" placeholder="Name #1" required>
+                            <!-- Hidden Add Another Name button-->
+                            <div class="mb-3">
+                                <button id="add-name" type="button" class="btn btn-success d-none">Add Another Name</button>
                             </div>
-                            <button onclick="nextStep()" type="submit" class="btn btn-success">Submit</button>
+                            <div>
+                                <button onclick="nextStep()" type="submit" class="btn btn-success">Submit</button>
+                            </div>
                         </div>
-                        <!-- Hidden Add Another Name button-->
-                        <button id="add-name" type="button" class="btn btn-success d-none">Add Another Name</button>
                         <!-- Hidden gift-interface -->
                         <div id="gift-interface" class="gift-interface hidden">
                             <img src="#" alt="Gift" id="gift-image" class="image-container mb-1">
