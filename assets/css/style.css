@@ -186,7 +186,7 @@ h1{
 :root{
 
     --color-bg : radial-gradient( circle farthest-corner at 50.4% 50.5%,
-    rgba(57, 181, 51, 1) 0%, rgba(35, 91, 32,1)90%);
+    rgb(206, 158, 158) 0%, rgb(111, 21, 21)90%);
 
     --color-tree-back : linear-gradient( to left , rgb(1, 59, 1), rgb(13, 244, 90), rgb(1, 59, 1));
 
