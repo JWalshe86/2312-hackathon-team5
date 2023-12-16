@@ -25,41 +25,42 @@ const images = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  // Add add-name button listener
+  document.getElementById('add-name').addEventListener('click', addNameField);
+  // Function for adding new name input fields
+  function addNameField() {
+  } 
   
   // Form submission handling function
   document
     .getElementById("name-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
+      document.getElementById("add-name").classList.remove("hidden");
+
+      // Get the checkbox value
+      const isCheckboxChecked = document.getElementById("multipleParticipantsCheckbox").checked;
+
+      // Show/hide Add Name button
+      // if (isCheckboxChecked) {
+      //   document.getElementById("add-name").classList.remove("d-none");
+      //   addNameField();
+      // } else {
+      //   document.getElementById("add-name").classList.add("d-none");
+      //   removeAdditionalNameFields();
+      // }
+
+      function removeAdditionalNameFields() {
+      }
 
       // Name input from user
       const nameInput = document.getElementById("nameInput");
       const name = nameInput.value;
 
-      // Results displayed into a table row, inserted into the HTML
-      //const tableBody = document.getElementById("name-list");
-      //const row = document.createElement("tr");
-      //row.innerHTML = `<td>${name}</td><td>${randomGift}</td><td></td>`;
-      //tableBody.appendChild(row);
-
-      // Results displayed into card
-      // const resultsSection = document.getElementById("name-list");
-      // const card = document.createElement("div");
-      // card.classList.add("card");
-      // card.innerHTML = `
-      //   <div class="card-header">${name}</div>
-      //   <div class="card-body">${randomGift}</div>
-      // `;
-      // resultsSection.appendChild(card);
-
       // Clears the name input value so as to not repeat default behaviour
       nameInput.value = "";
     });
-
-  // Added by Yuliia:
-  // This section of the code was added by me to implement the show/hide instructions functionality.
-  // I had to encapsulate all the code under a single 'DOMContentLoaded' event listener for the newly
-  // added functionality to work properly.
 
   // Function for showing/hiding instructions
   const instructionsButton = document.getElementById("instructionsToggle");
