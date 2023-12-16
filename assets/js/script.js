@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let nameFieldCount = 2;
 
   function addNameField() {
-    const nameInputsContainer = document.getElementById('additional-names');// Container for input fields
+    const nameInputsContainer = document.getElementById('form-group');// Container for input fields
 
     // Create a new div element for the input field
     const newInputDiv = document.createElement('div');
@@ -85,22 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("submit", function (event) {
       event.preventDefault();
       document.getElementById("add-name").classList.remove("hidden");
-
-      // Get the checkbox value
-      const isCheckboxChecked = document.getElementById("multipleParticipantsCheckbox").checked;
-
-      // Show/hide Add Name button
-      // if (isCheckboxChecked) {
-      //   document.getElementById("add-name").classList.remove("d-none");
-      //   addNameField();
-      // } else {
-      //   document.getElementById("add-name").classList.add("d-none");
-      //   removeAdditionalNameFields();
-      // }
-
-      function removeAdditionalNameFields() {
-      }
-
+      
       // Name input from user
       const nameInput = document.getElementById("nameInput");
       const name = nameInput.value;
