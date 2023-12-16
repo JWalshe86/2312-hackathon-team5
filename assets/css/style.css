@@ -210,7 +210,7 @@ body{
     min-height: 100vh;
     background-image: var(--color-bg);
     animation: bg-animation 6s ease infinite;
-    cursor:url('/assets/images/santa3small.jpg'), auto;
+    cursor:url('../images/santa3small.jpg'), auto;
 }
 
 @keyframes bg-animation{
@@ -366,7 +366,7 @@ body{
 
 /* cursor */
 
-.cursor {
+#cursor {
     width: 20px;
     height: 20px;
     border: 1px solid rgb(246, 239, 239);
@@ -379,7 +379,7 @@ body{
     z-index: 14;
 }
 
-.cursor::after {
+#cursor::after {
     content: "";
     width: 20px;
     height: 20px;
