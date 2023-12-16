@@ -112,14 +112,12 @@
 }
 
 .gift-interface {
-    display: none;
     text-align: center;
 }
 
 #gift-image {
     max-width: 50%;
     height: auto;
-    /* margin-top: 20px; */
     display: none;
     border-radius: 30%;
 }

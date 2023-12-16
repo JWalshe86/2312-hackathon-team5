@@ -1,27 +1,27 @@
 // Array of gifts
 const gifts = [
-  "bag of coal",
-  "Big-boi cat teddy",
+  "a bag of coal",
+  "a Big-boi cat teddy",
   "Shrek 1 on DVD",
-  "Rubber chicken",
-  "Propeller hat",
-  "pack of ham",
-  "chicken leg socks",
-  "banana costume",
-  "turkey hat",
+  "a rubber chicken",
+  "a propeller hat",
+  "a pack of ham",
+  "some chicken leg socks",
+  "a banana costume",
+  "a turkey hat",
 ];
 
 // Images stored as variables associated with gift name
 const images = {
-  "bag of coal": "./assets/images/bag of coal.jpg",
-  "Big-boi cat teddy": "./assets/images/big cat teddy.webp",
+  "a bag of coal": "./assets/images/bag of coal.jpg",
+  "a Big-boi cat teddy": "./assets/images/big cat teddy.webp",
   "Shrek 1 on DVD": "./assets/images/shrek dvd.jpg",
-  "Rubber chicken": "./assets/images/rubber chicken.jpg",
-  "Propeller hat": "./assets/images/propeller hat.webp",
-  "pack of ham": "./assets/images/pack of ham.jpg",
-  "chicken leg socks": "./assets/images/chicken leg socks.webp",
-  "banana costume": "./assets/images/banana costume.jpg",
-  "turkey hat": "./assets/images/turkey hat.jpg"
+  "a rubber chicken": "./assets/images/rubber chicken.jpg",
+  "a propeller hat": "./assets/images/propeller hat.webp",
+  "a pack of ham": "./assets/images/pack of ham.jpg",
+  "some chicken leg socks": "./assets/images/chicken leg socks.webp",
+  "a banana costume": "./assets/images/banana costume.jpg",
+  "a turkey hat": "./assets/images/turkey hat.jpg"
 };
 
 // "keiron" branch : 
@@ -142,7 +142,7 @@ function handleStep2(userInput, randomGift) {
   submitButton.style.display = "none";
   giftInterface.style.display = "block";
   giftImage.style.display = "block";
-  giftMessage.textContent = `Get ready ${userInput}! You're getting a ${randomGift}!`;
+  giftMessage.textContent = `Oh boy! Looks like ${userInput}'s getting ${randomGift}!`;
   giftImage.src = images[randomGift] || ""; // This piece of code is beautiful fr
 }
 
@@ -150,6 +150,7 @@ function handleStep2(userInput, randomGift) {
 function handleStep3() {
   formGroup.style.display = "none";
   giftImage.style.display = "none";
+  nextButton.style.display = "none";
   giftMessage.innerHTML = `Here you go! Here is your shopping voucher: 
       <a href="path-to-your-voucher.pdf" target="_blank">Download Voucher</a>`;
 }
