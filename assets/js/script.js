@@ -21,188 +21,105 @@ const images = {
   "a pack of ham": "./assets/images/pack of ham.jpg",
   "some chicken leg socks": "./assets/images/chicken leg socks.webp",
   "a banana costume": "./assets/images/banana costume.jpg",
-  "a turkey hat": "./assets/images/turkey hat.jpg"
+  "a turkey hat": "./assets/images/turkey hat.jpg",
 };
 
-// "keiron" branch : 
+// Vouchers stored as variables associated with users
+const vouchers = {
+  "a bag of coal": "./assets/vouchers/cheeky-coal.png",
+  "a Big-boi cat teddy": "./assets/vouchers/cheeky-big-boi-cat-teddy.png",
+  "Shrek 1 on DVD": "./assets/vouchers/cheeky-shrek.png",
+  "a rubber chicken": "./assets/vouchers/cheeky-chicken.png",
+  "a propeller hat": "./assets/vouchers/cheeky-hat.png",
+  "a pack of ham": "./assets/vouchers/cheeky-ham.png",
+  "some chicken leg socks": "./assets/vouchers/cheeky-socks.png",
+  "a banana costume": "./assets/vouchers/cheeky-banana.png",
+  "a turkey hat": "./assets/vouchers/cheeky-turkey-hat.png",
+};
+
+// "keiron" branch :
 
 let currentStep = 1;
+let selectedGift;
 const instructionsButton = document.getElementById("instructionsToggle");
-const instructionsContent = document.getElementById("instructionsContent");
 const progressBar = document.getElementById("progress-bar");
-const participantsCheckbox = document.getElementById("participants-checkbox");
 const formGroup = document.getElementById("form-group");
 const submitButton = document.getElementById("submit-button");
 const giftInterface = document.getElementById("gift-interface");
 const giftMessage = document.getElementById("gift-message");
 const nextButton = document.getElementById("next-button");
 const giftImage = document.getElementById("gift-image");
-const addNameButton = document.getElementById("add-name");
-const nameInput = document.getElementById("nameInput");
-const multipleParticipantsCheckbox = document.getElementById('multipleParticipantsCheckbox');
-
-const names = []; // Stores the names of the participants
-const giftCollection = {}; // Stores the name and gift pairs name: gift
-
-// Function for receiving a random gift
-function getRandomGift() {
-  return gifts[Math.floor(Math.random() * gifts.length)];
-}
-
-// Function for checking the checkbox state
-function isCheckboxChecked() {
-  return multipleParticipantsCheckbox.checked;
-}
+const backButton = document.getElementById("back-button");
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  //Add-name button listener
-  addNameButton.addEventListener('click', addNameField);
-  let nameFieldCount = 2;
-
-  // Function for adding another name fields
-  function addNameField() {
-    const newInputDiv = document.createElement('div');
-    newInputDiv.classList.add('mb-3');
-    const newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.id = `nameInput${nameFieldCount}`;
-    newInput.classList.add('form-control');
-    newInput.placeholder = `Name #${nameFieldCount}`;
-
-    newInputDiv.appendChild(newInput);
-
-    formGroup.appendChild(newInputDiv);
-
-    nameFieldCount++;
-  }
-
-  // Event handler for the checkbox
-  multipleParticipantsCheckbox.addEventListener('change', function () {
-    if (isCheckboxChecked()) {
-      addNameButton.classList.remove("d-none");
-    } else {
-      addNameButton.classList.add("d-none");
-      removeAdditionalNameFields();
-    }
-  });
-
   // Form submission handling function
   document
     .getElementById("name-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
-      collectNames();
-      if (names.length > 1 && names.length % 2 !== 0) {
-        alert("Please enter an even number of names. Add one more name, please.");
-        return; // Stop further execution
-      }
-      handleStep1();
-      addNameButton.classList.remove("hidden");
+
+      // Name input from user
+      const nameInput = document.getElementById("nameInput");
+      const name = nameInput.value;
+
+      // Clears the name input value so as to not repeat default behaviour
       nameInput.value = "";
     });
+
+  // Function for showing/hiding instructions
+  const instructionsButton = document.getElementById("instructionsToggle");
+  const instructionsContent = document.getElementById("instructionsContent");
+
+  instructionsButton.addEventListener("click", () => {
+    instructionsContent.classList.toggle("hide");
+    instructionsButton.textContent = instructionsContent.classList.contains(
+      "hide"
+    )
+      ? "Show Instructions"
+      : "Hide Instructions";
+  });
+
+  // Back button listener
+  const backButton = document.getElementById("back-button");
+  backButton.addEventListener("click", backStep);
 });
 
-// Function for adding names to the array
-function collectNames() {
-  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
-    const trimmedName = input.value.trim();
-    if (trimmedName !== '') {
-      names.push(trimmedName);
-    }
-  });
-  console.log(names);
-}
-
-// Function for showing/hiding instructions
-instructionsButton.addEventListener("click", () => {
-  instructionsContent.classList.toggle("hide");
-  instructionsButton.textContent = instructionsContent.classList.contains(
-    "hide"
-  )
-    ? "Show Instructions"
-    : "Hide Instructions";
-});
-
-// Function for assigning gifts to names
-function assignGiftsToNames() {
-  names.forEach(name => {
-    if (name.trim() !== '') {
-      const randomGift = getRandomGift();
-      giftCollection[name.trim()] = randomGift;
-    }
-  });
-}
-
-// Function for creating pairs of names
-function createNamePairs() {
-  const pairs = {};
-  let pairIndex = 1;
-
-  if (names.length % 2 !== 0) {
-    names.push("Unknown");
-  }
-
-  for (let i = 0; i < names.length; i += 2) {
-    const firstPerson = names[i];
-    const secondPerson = names[i + 1];
-
-    const firstPersonGift = giftCollection[firstPerson];
-    const secondPersonGift = giftCollection[secondPerson];
-
-    pairs[`Pair ${pairIndex}`] = [
-      { name: firstPerson, gift: firstPersonGift },
-      { name: secondPerson, gift: secondPersonGift }
-    ];
-
-    pairIndex++;
-  }
-
-  console.log(pairs);
-
-  return pairs;
-}
-
-
-// Function for handling the all steps
 function nextStep() {
   const totalSteps = 3;
-  currentStep++;
+  // Takes name value to pass down function
+  const userInput = document.getElementById("nameInput").value.trim();
 
-  if (currentStep > totalSteps) {
-    return;
-  }
-  updateProgressBar((currentStep / totalSteps) * 100);
-
-  // Process the transition to the next step
-  switch (currentStep) {
-    case 2:
-      handleStep2();
-      break;
-    case 3:
-      if (names.length % 2 === 0 || names.length === 1) { // Ensure an even number of names or a single name
-        handleStep3();
-      }
-      break;
-    default:
-      break;
-  }
-}
-
-// Function handling 1-st step on the progress bar
-function handleStep1() {
-  const userInputValue = nameInput.value.trim();
-  if (userInputValue === "") {
+  // Validates any empty fields
+  if (currentStep === 1 && userInput === "") {
     alert("Please enter a name.");
     return;
   }
 
+  // Stops step count going beyond "Step 3"
+  if (currentStep === 3) {
+    return;
+  }
+
+  // If selectedGift is not set, generate a new one; otherwise, use the existing one
+  if (!selectedGift) {
+    selectedGift = gifts[Math.floor(Math.random() * gifts.length)];
+    console.log(selectedGift);
+  }
+
+  // Increments the progress bar steps +1
+  currentStep++;
+
+  // Handles the number for the width
   const nextWidth = (currentStep / totalSteps) * 100;
 
+  // Calls function to increase progress bar
   updateProgressBar(nextWidth);
-  collectNames();
-  assignGiftsToNames();
-  nextStep();
+
+  if (currentStep === 2) {
+    handleStep2(userInput, selectedGift);
+  } else if (currentStep === 3) {
+    handleStep3(userInput, selectedGift); // Pass the selectedGift to Step 3
+  }
 }
 
 // Progress bar element update function
@@ -213,105 +130,60 @@ function updateProgressBar(width) {
   progressBarElement.textContent = `Step ${currentStep}`;
 }
 
-// Function handling 2-nd step on the progress bar
-function handleStep2() {
+// The interface on "Step 2"
+function handleStep2(userInput, selectedGift) {
+  console.log(userInput, selectedGift);
   formGroup.style.display = "none";
   instructionsButton.style.display = "none";
-  participantsCheckbox.style.display = "none";
   submitButton.style.display = "none";
-  addNameButton.style.display = "none";
-
-  // Displays the gift interface
-  giftInterface.style.display = "block";
-
-  // Collect names and assign random gifts to each name
-  collectNames();
-  assignGiftsToNames();
-
-  // If there is only one name in the names array, show its gift
-  if (names.length === 1) {
-    const singleName = names[0];
-    const gift = giftCollection[singleName];
-    const giftImageUrl = images[gift] || "";
-    const singleGiftDiv = document.createElement('div');
-    singleGiftDiv.innerHTML = `
-      <p>${singleName} will receive: ${gift}</p>
-      <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
-    `;
-    giftInterface.appendChild(singleGiftDiv);
-  } else {
-    // Otherwise, show gifts for all couples
-    const namePairs = createNamePairs();
-
-    for (const pair in namePairs) {
-      const pairDiv = document.createElement('div');
-      pairDiv.innerHTML = `<h3>${pair}</h3>`;
-    
-      namePairs[pair].forEach(person => {
-        const gift = person.gift || "No gift assigned";
-        const giftImageUrl = images[gift] || "";
-        const cardDiv = document.createElement('div');
-        cardDiv.innerHTML = `
-          <p>${person.name} will receive: ${gift}</p>
-          <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
-        `;
-        pairDiv.appendChild(cardDiv);
-      });
-    
-      giftInterface.appendChild(pairDiv);
-    }    
-  }
+  nextButton.style.display = "inline-flex";
+  giftInterface.style.display = "flex";
+  giftImage.style.display = "block";
+  giftMessage.textContent = `Damn, Merry Christmas! Looks like ${userInput}'s getting ${selectedGift}!`;
+  giftImage.src = images[selectedGift] || "";
 }
 
-// Function handling 3-d step on the progress bar
-function handleStep3() {
-  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
-    input.removeAttribute('required');
-  });
-
+// The interface on "Step 3"
+function handleStep3(userInput, selectedGift) {
+  console.log("Selected Gift:", selectedGift); // Log the selected gift
   formGroup.style.display = "none";
-  giftInterface.style.display = "none";
+  giftImage.style.display = "none";
   nextButton.style.display = "none";
+  backButton.style.display = "inline-flex";
+  let voucher = vouchers[selectedGift] || "";
+  giftMessage.innerHTML = `Voila! Here is your <a href="${voucher}" target="_blank">Cheeky Santa Treasure!</a> Present this to the shop on the address and claim your gift.`;
+}
 
-  // Create an interface for step 3
-  const step3Interface = document.createElement("div");
+// Back button to restore interface
+function backStep() {
+  // Reset current step to 1
+  currentStep = 1;
 
-  // Add information about gifts and a link to the voucher
-  for (const name in giftCollection) {
-    const gift = giftCollection[name];
-    const giftImageUrl = images[gift] || "";
-    const cardDiv = document.createElement('div');
-    cardDiv.innerHTML = `
-      <p>${name} will receive: ${gift}</p>
-      <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
-      <p>Here is your shopping voucher: 
-        <a href="./assets/images/voucher-template.png" target="_blank">Download Voucher</a>
-      </p>
-    `;
-    step3Interface.appendChild(cardDiv);
-  }
-  document.body.appendChild(step3Interface);
+  // Reset the selected gift
+  selectedGift = undefined;
+
+  // Reset progress bar
+  updateProgressBar(33);
+
+  // Show the initial form and hide other elements
+  formGroup.style.display = "block";
+  instructionsButton.style.display = "inline-block";
+  submitButton.style.display = "inline-block";
+  nextButton.style.display = "none";
+  backButton.style.display = "none";
+  giftInterface.style.display = "none";
+  giftImage.style.display = "none";
+  giftMessage.textContent = "";
+
+  // Clear any existing name input value
+  document.getElementById("nameInput").value = "";
 }
 
 // Snowfall effect
 $(document).snowfall({
-  flakeCount: 200,   // number of snowflakes
-  minSize: 1,     // min size of snowflake, 1px by default
-  maxSize: 4,     // max size of snowflake, 3px by default
-  minSpeed: 1,     // min speed of snowflake, 1 by default
-  maxSpeed: 3      // max speed of snowflake, 5 by default
+  flakeCount: 200, // number of snowflakes
+  minSize: 1, // min size of snowflake, 1px by default
+  maxSize: 4, // max size of snowflake, 3px by default
+  minSpeed: 1, // min speed of snowflake, 1 by default
+  maxSpeed: 3, // max speed of snowflake, 5 by default
 });
-
-const cursor = document.querySelector('.cursor');
-
-document.addEventListener('mousemove', e => {
-    cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;")
-})
-
-document.addEventListener('click', () => {
-    cursor.classList.add("expand")
-
-    setTimeout(() => {
-        cursor.classList.remove("expand");
-    }, 500)
-})

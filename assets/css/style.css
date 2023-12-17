@@ -20,7 +20,7 @@
 
 .image-container {
   max-width: 100%;
-  max-height: 300px;
+  max-height: 500px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -82,6 +82,11 @@
 
 /* Instruction section */
 
+#instructionsContent {
+  margin-top: -35px;
+  font-size: 14px;
+}
+
 .hide {
   display: none;
 }
@@ -104,20 +109,22 @@
   text-align: center;
 }
 
+#gift-message {
+  margin-top: 15px;
+  font-size: 15px;
+}
+
 .gift-image {
-  max-width: 100px;
+  max-width: 200px;
   height: auto;
   display: block;
-  margin: 10px auto;
   border-radius: 10px;
-  float: right;
-  padding-right: 20px;
 }
 
 /* Background Image section */
 .masthead {
   background-size: cover;
-  min-height: 100vh;
+  min-height: 85vh;
   position: relative;
   color: white;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.7);
@@ -128,10 +135,14 @@ h1 {
   font-family: "Mountains of Christmas", serif;
 }
 
+h2, h3, h4, h5, h6 {
+  font-family: "Mountains of Christmas", serif;
+}
+
 .color-overlay {
   position: absolute;
   width: 100%;
-  height: 60%;
+  /* height: 30%; */
 }
 
 .naughty {
@@ -151,6 +162,24 @@ h1 {
 @media (max-width: 768px) {
   h1 {
     font-size: calc(1.525rem + 3.3vw);
+  }
+}
+
+@media (max-width: 576px) {
+  .color-overlay {
+    position: absolute;
+    width: 10%;
+    height: 70%;
+  }
+
+  .naughty {
+    margin-bottom: 150px;
+    height: 70%;
+    background-color: rgba(0, 0, 0, 0)
+  }
+
+  #instructionsToggle {
+    display: none;
   }
 }
 
@@ -226,7 +255,6 @@ body {
   min-height: 100vh;
   background-image: var(--color-bg);
   animation: bg-animation 6s ease infinite;
-  cursor: url("../images/santa3small.jpg"), auto;
 }
 
 p {
