@@ -71,9 +71,6 @@
         <h1 class="display-5 fw-bold pt-4">
           Ready to gift your naughty ones with oddities?
         </h1>
-        <!-- <p class="col-md-12 fs-4">
-          Click the instructions button to know more...
-        </p> -->
         <!-- Instructions Toggle Button -->
         <div class="container text-center my-4">
           <button id="instructionsToggle" class="btn btn-success">
@@ -134,24 +131,24 @@
               <!-- Hidden gift-interface -->
               <div id="gift-interface" class="gift-interface hidden">
                 <!-- Gift description -->
-                <p id="gift-message"></p>
+                <p id="gift-message" class="mx-3"></p>
                 <!-- Gift image -->
                 <img
                   src="#"
                   alt="Gift"
                   id="gift-image"
-                  class="image-container mb-1"
+                  class="image-container mb-1 gift-image"
                 />
-                <!-- Next button -->
-                <button
-                  onclick="nextStep()"
-                  type="submit"
-                  class="btn btn-success"
-                  id="next-button"
-                >
-                  Next
-                </button>
               </div>
+              <!-- Next button -->
+              <button
+                onclick="nextStep()"
+                type="submit"
+                class="btn btn-success hidden"
+                id="next-button"
+              >
+                Next
+              </button>
             </form>
           </div>
         </div>

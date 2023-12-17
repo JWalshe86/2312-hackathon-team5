@@ -115,7 +115,8 @@ function handleStep2(userInput, randomGift) {
   formGroup.style.display = "none";
   instructionsButton.style.display = "none";
   submitButton.style.display = "none";
-  giftInterface.style.display = "block";
+  nextButton.style.display = "inline-flex";
+  giftInterface.style.display = "flex";
   giftImage.style.display = "block";
   giftMessage.textContent = `Oh boy! Looks like ${userInput}'s getting ${randomGift}!`;
   giftImage.src = images[randomGift] || ""; // This piece of code is beautiful fr
