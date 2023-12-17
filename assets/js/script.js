@@ -40,6 +40,7 @@ const vouchers = {
 // "keiron" branch :
 
 let currentStep = 1;
+let selectedGift;
 const instructionsButton = document.getElementById("instructionsToggle");
 const progressBar = document.getElementById("progress-bar");
 const formGroup = document.getElementById("form-group");
@@ -94,9 +95,11 @@ function nextStep() {
     return;
   }
 
-  // Math function to randomly generate gift
-  selectedGift = gifts[Math.floor(Math.random() * gifts.length)]; // Store the selected gift
-  console.log(selectedGift);
+  // If selectedGift is not set, generate a new one; otherwise, use the existing one
+  if (!selectedGift) {
+    selectedGift = gifts[Math.floor(Math.random() * gifts.length)];
+    console.log(selectedGift);
+  }
 
   // Increments the progress bar steps +1
   currentStep++;
@@ -137,6 +140,7 @@ function handleStep2(userInput, selectedGift) {
 
 // The interface on "Step 3"
 function handleStep3(userInput, selectedGift) {
+  console.log("Selected Gift:", selectedGift); // Log the selected gift
   formGroup.style.display = "none";
   giftImage.style.display = "none";
   nextButton.style.display = "none";
