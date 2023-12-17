@@ -21,10 +21,10 @@ const images = {
   "a pack of ham": "./assets/images/pack of ham.jpg",
   "some chicken leg socks": "./assets/images/chicken leg socks.webp",
   "a banana costume": "./assets/images/banana costume.jpg",
-  "a turkey hat": "./assets/images/turkey hat.jpg",
+  "a turkey hat": "./assets/images/turkey hat.jpg"
 };
 
-// "keiron" branch :
+// "keiron" branch : 
 
 let currentStep = 1;
 const instructionsButton = document.getElementById("instructionsToggle");
@@ -39,9 +39,7 @@ const nextButton = document.getElementById("next-button");
 const giftImage = document.getElementById("gift-image");
 const addNameButton = document.getElementById("add-name");
 const nameInput = document.getElementById("nameInput");
-const multipleParticipantsCheckbox = document.getElementById(
-  "multipleParticipantsCheckbox"
-);
+const multipleParticipantsCheckbox = document.getElementById('multipleParticipantsCheckbox');
 
 const names = []; // Stores the names of the participants
 const giftCollection = {}; // Stores the name and gift pairs name: gift
@@ -57,18 +55,19 @@ function isCheckboxChecked() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
   //Add-name button listener
-  addNameButton.addEventListener("click", addNameField);
+  addNameButton.addEventListener('click', addNameField);
   let nameFieldCount = 2;
 
   // Function for adding another name fields
   function addNameField() {
-    const newInputDiv = document.createElement("div");
-    newInputDiv.classList.add("mb-3");
-    const newInput = document.createElement("input");
-    newInput.type = "text";
+    const newInputDiv = document.createElement('div');
+    newInputDiv.classList.add('mb-3');
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
     newInput.id = `nameInput${nameFieldCount}`;
-    newInput.classList.add("form-control");
+    newInput.classList.add('form-control');
     newInput.placeholder = `Name #${nameFieldCount}`;
 
     newInputDiv.appendChild(newInput);
@@ -79,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Event handler for the checkbox
-  multipleParticipantsCheckbox.addEventListener("change", function () {
+  multipleParticipantsCheckbox.addEventListener('change', function () {
     if (isCheckboxChecked()) {
       addNameButton.classList.remove("d-none");
     } else {
@@ -122,8 +121,8 @@ instructionsButton.addEventListener("click", () => {
 
 // Function for assigning gifts to names
 function assignGiftsToNames() {
-  names.forEach((name) => {
-    if (name.trim() !== "") {
+  names.forEach(name => {
+    if (name.trim() !== '') {
       const randomGift = getRandomGift();
       giftCollection[name.trim()] = randomGift;
     }
@@ -205,6 +204,7 @@ function handleStep2() {
   // Displays the gift interface
   giftInterface.style.display = "block";
 
+  // Collect names and assign random gifts to each name
   collectNames();
 
   const namePairs = createNamePairs();
@@ -265,17 +265,16 @@ console.log(dataString);
       pairDiv.appendChild(cardDiv);
     });
 
-    giftInterface.appendChild(pairDiv);
+      giftInterface.appendChild(pairDiv);
+    }
   }
 }
 
 // Function handling 3-d step on the progress bar
 function handleStep3() {
-  document
-    .querySelectorAll('#form-group input[type="text"]')
-    .forEach((input) => {
-      input.removeAttribute("required");
-    });
+  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
+    input.removeAttribute('required');
+  });
 
   formGroup.style.display = "none";
   giftInterface.style.display = "none";
@@ -288,7 +287,7 @@ function handleStep3() {
   for (const name in giftCollection) {
     const gift = giftCollection[name];
     const giftImageUrl = images[gift] || "";
-    const cardDiv = document.createElement("div");
+    const cardDiv = document.createElement('div');
     cardDiv.innerHTML = `
       <p>${name} will receive: ${gift}</p>
       <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
@@ -303,26 +302,23 @@ function handleStep3() {
 
 // Snowfall effect
 $(document).snowfall({
-  flakeCount: 200, // number of snowflakes
-  minSize: 1, // min size of snowflake, 1px by default
-  maxSize: 4, // max size of snowflake, 3px by default
-  minSpeed: 1, // min speed of snowflake, 1 by default
-  maxSpeed: 3, // max speed of snowflake, 5 by default
+  flakeCount: 200,   // number of snowflakes
+  minSize: 1,     // min size of snowflake, 1px by default
+  maxSize: 4,     // max size of snowflake, 3px by default
+  minSpeed: 1,     // min speed of snowflake, 1 by default
+  maxSpeed: 3      // max speed of snowflake, 5 by default
 });
 
-const cursor = document.querySelector(".cursor");
+const cursor = document.querySelector('.cursor');
 
-document.addEventListener("mousemove", (e) => {
-  cursor.setAttribute(
-    "style",
-    "top: " + (e.pageY - 10) + "px; left: " + (e.pageX - 10) + "px;"
-  );
-});
+document.addEventListener('mousemove', e => {
+    cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;")
+})
 
-document.addEventListener("click", () => {
-  cursor.classList.add("expand");
+document.addEventListener('click', () => {
+    cursor.classList.add("expand")
 
-  setTimeout(() => {
-    cursor.classList.remove("expand");
-  }, 500);
-});
+    setTimeout(() => {
+        cursor.classList.remove("expand");
+    }, 500)
+})
