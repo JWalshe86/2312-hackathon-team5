@@ -21,10 +21,10 @@ const images = {
   "a pack of ham": "./assets/images/pack of ham.jpg",
   "some chicken leg socks": "./assets/images/chicken leg socks.webp",
   "a banana costume": "./assets/images/banana costume.jpg",
-  "a turkey hat": "./assets/images/turkey hat.jpg",
+  "a turkey hat": "./assets/images/turkey hat.jpg"
 };
 
-// "keiron" branch :
+// "keiron" branch : 
 
 let currentStep = 1;
 const instructionsButton = document.getElementById("instructionsToggle");
@@ -39,9 +39,7 @@ const nextButton = document.getElementById("next-button");
 const giftImage = document.getElementById("gift-image");
 const addNameButton = document.getElementById("add-name");
 const nameInput = document.getElementById("nameInput");
-const multipleParticipantsCheckbox = document.getElementById(
-  "multipleParticipantsCheckbox"
-);
+const multipleParticipantsCheckbox = document.getElementById('multipleParticipantsCheckbox');
 
 const names = []; // Stores the names of the participants
 const giftCollection = {}; // Stores the name and gift pairs name: gift
@@ -57,18 +55,19 @@ function isCheckboxChecked() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
   //Add-name button listener
-  addNameButton.addEventListener("click", addNameField);
+  addNameButton.addEventListener('click', addNameField);
   let nameFieldCount = 2;
 
   // Function for adding another name fields
   function addNameField() {
-    const newInputDiv = document.createElement("div");
-    newInputDiv.classList.add("mb-3");
-    const newInput = document.createElement("input");
-    newInput.type = "text";
+    const newInputDiv = document.createElement('div');
+    newInputDiv.classList.add('mb-3');
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
     newInput.id = `nameInput${nameFieldCount}`;
-    newInput.classList.add("form-control");
+    newInput.classList.add('form-control');
     newInput.placeholder = `Name #${nameFieldCount}`;
 
     newInputDiv.appendChild(newInput);
@@ -79,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Event handler for the checkbox
-  multipleParticipantsCheckbox.addEventListener("change", function () {
+  multipleParticipantsCheckbox.addEventListener('change', function () {
     if (isCheckboxChecked()) {
       addNameButton.classList.remove("d-none");
     } else {
@@ -93,6 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("name-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
+      collectNames();
+      if (names.length > 1 && names.length % 2 !== 0) {
+        alert("Please enter an even number of names. Add one more name, please.");
+        return; // Stop further execution
+      }
+      handleStep1();
       addNameButton.classList.remove("hidden");
       nameInput.value = "";
     });
@@ -100,14 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function for adding names to the array
 function collectNames() {
-  document
-    .querySelectorAll('#form-group input[type="text"]')
-    .forEach((input) => {
-      const trimmedName = input.value.trim();
-      if (trimmedName !== "") {
-        names.push(trimmedName);
-      }
-    });
+  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
+    const trimmedName = input.value.trim();
+    if (trimmedName !== '') {
+      names.push(trimmedName);
+    }
+  });
+  console.log(names);
 }
 
 // Function for showing/hiding instructions
@@ -122,8 +126,8 @@ instructionsButton.addEventListener("click", () => {
 
 // Function for assigning gifts to names
 function assignGiftsToNames() {
-  names.forEach((name) => {
-    if (name.trim() !== "") {
+  names.forEach(name => {
+    if (name.trim() !== '') {
       const randomGift = getRandomGift();
       giftCollection[name.trim()] = randomGift;
     }
@@ -159,6 +163,7 @@ function createNamePairs() {
   return pairs;
 }
 
+
 // Function for handling the all steps
 function nextStep() {
   const totalSteps = 3;
@@ -175,7 +180,9 @@ function nextStep() {
       handleStep2();
       break;
     case 3:
-      handleStep3();
+      if (names.length % 2 === 0 || names.length === 1) { // Ensure an even number of names or a single name
+        handleStep3();
+      }
       break;
     default:
       break;
@@ -217,76 +224,50 @@ function handleStep2() {
   // Displays the gift interface
   giftInterface.style.display = "block";
 
+  // Collect names and assign random gifts to each name
   collectNames();
+  assignGiftsToNames();
 
-  const namePairs = createNamePairs();
-  console.log(namePairs);
+  // If there is only one name in the names array, show its gift
+  if (names.length === 1) {
+    const singleName = names[0];
+    const gift = giftCollection[singleName];
+    const giftImageUrl = images[gift] || "";
+    const singleGiftDiv = document.createElement('div');
+    singleGiftDiv.innerHTML = `
+      <p>${singleName} will receive: ${gift}</p>
+      <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+    `;
+    giftInterface.appendChild(singleGiftDiv);
+  } else {
+    // Otherwise, show gifts for all couples
+    const namePairs = createNamePairs();
 
-  // Assign random gifts to each name
-  names.forEach((name) => {
-    giftCollection[name] = getRandomGift();
-  });
-
-  console.log(giftCollection);
-
-  // Display gifts for each pair
-  for (const pair in namePairs) {
-    const pairDiv = document.createElement("div");
-    // pairDiv.innerHTML = `<h3>${pair}</h3>`;
-
-    namePairs[pair].forEach((name) => {
-      const gift = giftCollection[name];
-      const giftImageUrl = images[gift] || "";
-      const cardDiv = document.createElement("div");
-
-      console.log(names);
-
-      // Function to shuffle array
-const shuffle = (arr) => {
-  for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-const randomNames = shuffle(names);
-
-// Match each person with the next one, folding over at the end
-const matches = randomNames.map((name, index) => {
-return {
-  santa: name,
-  receiver: randomNames[index + 1] || randomNames[0],
-}
-});
-
-
-dataArray = matches.map(function(e){
-  return JSON.stringify(e);
-});
-
-dataString = dataArray.join(",");
+    for (const pair in namePairs) {
+      const pairDiv = document.createElement('div');
+      pairDiv.innerHTML = `<h3>${pair}</h3>`;
     
-          cardDiv.innerHTML = `
-        <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
-        <p>${dataString} ${gift}</p>
+      namePairs[pair].forEach(person => {
+        const gift = person.gift || "No gift assigned";
+        const giftImageUrl = images[gift] || "";
+        const cardDiv = document.createElement('div');
+        cardDiv.innerHTML = `
+          <p>${person.name} will receive: ${gift}</p>
+          <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
         `;
-      
-
-      pairDiv.appendChild(cardDiv);
-    });
-
-    giftInterface.appendChild(pairDiv);
+        pairDiv.appendChild(cardDiv);
+      });
+    
+      giftInterface.appendChild(pairDiv);
+    }    
   }
 }
 
 // Function handling 3-d step on the progress bar
 function handleStep3() {
-  document
-    .querySelectorAll('#form-group input[type="text"]')
-    .forEach((input) => {
-      input.removeAttribute("required");
-    });
+  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
+    input.removeAttribute('required');
+  });
 
   formGroup.style.display = "none";
   giftInterface.style.display = "none";
@@ -299,7 +280,7 @@ function handleStep3() {
   for (const name in giftCollection) {
     const gift = giftCollection[name];
     const giftImageUrl = images[gift] || "";
-    const cardDiv = document.createElement("div");
+    const cardDiv = document.createElement('div');
     cardDiv.innerHTML = `
       <p>${name} will receive: ${gift}</p>
       <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
@@ -314,26 +295,23 @@ function handleStep3() {
 
 // Snowfall effect
 $(document).snowfall({
-  flakeCount: 200, // number of snowflakes
-  minSize: 1, // min size of snowflake, 1px by default
-  maxSize: 4, // max size of snowflake, 3px by default
-  minSpeed: 1, // min speed of snowflake, 1 by default
-  maxSpeed: 3, // max speed of snowflake, 5 by default
+  flakeCount: 200,   // number of snowflakes
+  minSize: 1,     // min size of snowflake, 1px by default
+  maxSize: 4,     // max size of snowflake, 3px by default
+  minSpeed: 1,     // min speed of snowflake, 1 by default
+  maxSpeed: 3      // max speed of snowflake, 5 by default
 });
 
-const cursor = document.querySelector(".cursor");
+const cursor = document.querySelector('.cursor');
 
-document.addEventListener("mousemove", (e) => {
-  cursor.setAttribute(
-    "style",
-    "top: " + (e.pageY - 10) + "px; left: " + (e.pageX - 10) + "px;"
-  );
-});
+document.addEventListener('mousemove', e => {
+    cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;")
+})
 
-document.addEventListener("click", () => {
-  cursor.classList.add("expand");
+document.addEventListener('click', () => {
+    cursor.classList.add("expand")
 
-  setTimeout(() => {
-    cursor.classList.remove("expand");
-  }, 500);
-});
+    setTimeout(() => {
+        cursor.classList.remove("expand");
+    }, 500)
+})
