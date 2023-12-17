@@ -49,6 +49,7 @@ const giftInterface = document.getElementById("gift-interface");
 const giftMessage = document.getElementById("gift-message");
 const nextButton = document.getElementById("next-button");
 const giftImage = document.getElementById("gift-image");
+const backButton = document.getElementById("back-button");
 
 document.addEventListener("DOMContentLoaded", () => {
   // Form submission handling function
@@ -77,6 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ? "Show Instructions"
       : "Hide Instructions";
   });
+
+  // Back button listener
+  const backButton = document.getElementById("back-button");
+  backButton.addEventListener("click", backStep);
 });
 
 function nextStep() {
@@ -144,8 +149,34 @@ function handleStep3(userInput, selectedGift) {
   formGroup.style.display = "none";
   giftImage.style.display = "none";
   nextButton.style.display = "none";
+  backButton.style.display = "inline-flex";
   let voucher = vouchers[selectedGift] || "";
   giftMessage.innerHTML = `Voila! Here is your <a href="${voucher}" target="_blank">Cheeky Santa Treasure!</a> Present this to the shop on the address and claim your gift.`;
+}
+
+// Back button to restore interface
+function backStep() {
+  // Reset current step to 1
+  currentStep = 1;
+
+  // Reset the selected gift
+  selectedGift = undefined;
+
+  // Reset progress bar
+  updateProgressBar(33);
+
+  // Show the initial form and hide other elements
+  formGroup.style.display = "block";
+  instructionsButton.style.display = "inline-block";
+  submitButton.style.display = "inline-block";
+  nextButton.style.display = "none";
+  backButton.style.display = "none";
+  giftInterface.style.display = "none";
+  giftImage.style.display = "none";
+  giftMessage.textContent = "";
+
+  // Clear any existing name input value
+  document.getElementById("nameInput").value = "";
 }
 
 // Snowfall effect

@@ -233,7 +233,6 @@ body {
   min-height: 100vh;
   background-image: var(--color-bg);
   animation: bg-animation 6s ease infinite;
-  cursor: url("../images/santa3small.jpg"), auto;
 }
 
 p {
