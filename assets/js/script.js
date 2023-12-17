@@ -145,8 +145,7 @@ function handleStep3(userInput, selectedGift) {
   giftImage.style.display = "none";
   nextButton.style.display = "none";
   let voucher = vouchers[selectedGift] || "";
-  giftMessage.innerHTML = `Here you go, ${userInput}! Here is your shopping voucher: 
-      <a href="${voucher}" target="_blank">Download Voucher</a>`;
+  giftMessage.innerHTML = `Voila! Here is your <a href="${voucher}" target="_blank">Cheeky Santa Treasure!</a> Present this to the shop on the address and claim your gift.`;
 }
 
 // Snowfall effect
