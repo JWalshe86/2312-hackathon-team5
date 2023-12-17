@@ -24,6 +24,19 @@ const images = {
   "a turkey hat": "./assets/images/turkey hat.jpg",
 };
 
+// Vouchers stored as variables associated with users
+const vouchers = {
+  "a bag of coal": "./assets/vouchers/cheeky-coal.png",
+  "a Big-boi cat teddy": "./assets/vouchers/cheeky-big-boi-cat-teddy.png",
+  "Shrek 1 on DVD": "./assets/vouchers/cheeky-shrek.png",
+  "a rubber chicken": "./assets/vouchers/cheeky-chicken.png",
+  "a propeller hat": "./assets/vouchers/cheeky-hat.png",
+  "a pack of ham": "./assets/vouchers/cheeky-ham.png",
+  "some chicken leg socks": "./assets/vouchers/cheeky-socks.png",
+  "a banana costume": "./assets/vouchers/cheeky-banana.png",
+  "a turkey hat": "./assets/vouchers/cheeky-turkey-hat.png",
+};
+
 // "keiron" branch :
 
 let currentStep = 1;
@@ -82,8 +95,8 @@ function nextStep() {
   }
 
   // Math function to randomly generate gift
-  const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
-  console.log(randomGift);
+  selectedGift = gifts[Math.floor(Math.random() * gifts.length)]; // Store the selected gift
+  console.log(selectedGift);
 
   // Increments the progress bar steps +1
   currentStep++;
@@ -95,9 +108,9 @@ function nextStep() {
   updateProgressBar(nextWidth);
 
   if (currentStep === 2) {
-    handleStep2(userInput, randomGift);
+    handleStep2(userInput, selectedGift);
   } else if (currentStep === 3) {
-    handleStep3(userInput);
+    handleStep3(userInput, selectedGift); // Pass the selectedGift to Step 3
   }
 }
 
@@ -110,25 +123,26 @@ function updateProgressBar(width) {
 }
 
 // The interface on "Step 2"
-function handleStep2(userInput, randomGift) {
-  console.log(userInput, randomGift);
+function handleStep2(userInput, selectedGift) {
+  console.log(userInput, selectedGift);
   formGroup.style.display = "none";
   instructionsButton.style.display = "none";
   submitButton.style.display = "none";
   nextButton.style.display = "inline-flex";
   giftInterface.style.display = "flex";
   giftImage.style.display = "block";
-  giftMessage.textContent = `Oh boy! Looks like ${userInput}'s getting ${randomGift}!`;
-  giftImage.src = images[randomGift] || ""; // This piece of code is beautiful fr
+  giftMessage.textContent = `Damn, Merry Christmas! Looks like ${userInput}'s getting ${selectedGift}!`;
+  giftImage.src = images[selectedGift] || "";
 }
 
 // The interface on "Step 3"
-function handleStep3() {
+function handleStep3(userInput, selectedGift) {
   formGroup.style.display = "none";
   giftImage.style.display = "none";
   nextButton.style.display = "none";
-  giftMessage.innerHTML = `Here you go! Here is your shopping voucher: 
-      <a href="./assets/images/voucher-template.png" target="_blank">Download Voucher</a>`;
+  let voucher = vouchers[selectedGift] || "";
+  giftMessage.innerHTML = `Here you go, ${userInput}! Here is your shopping voucher: 
+      <a href="${voucher}" target="_blank">Download Voucher</a>`;
 }
 
 // Snowfall effect
