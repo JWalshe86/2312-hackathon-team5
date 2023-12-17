@@ -139,10 +139,22 @@ function createNamePairs() {
     names.push("Unknown");
   }
 
-  for (let i = 0; i < 1; i++) {
-    pairs[`Pair ${pairIndex}`] = [names[i]];
+  for (let i = 0; i < names.length; i += 2) {
+    const firstPerson = names[i];
+    const secondPerson = names[i + 1];
+
+    const firstPersonGift = giftCollection[firstPerson];
+    const secondPersonGift = giftCollection[secondPerson];
+
+    pairs[`Pair ${pairIndex}`] = [
+      { name: firstPerson, gift: firstPersonGift },
+      { name: secondPerson, gift: secondPersonGift }
+    ];
+
     pairIndex++;
   }
+
+  console.log(pairs);
 
   return pairs;
 }
