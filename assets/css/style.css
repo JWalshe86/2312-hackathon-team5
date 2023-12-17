@@ -483,8 +483,8 @@ p {
   text-align: center;
   margin-top: 50px;
   font-size: 1.4em;
+}
 
-  a {
-    color: teal;
-  }
+a {
+  color: teal;
 }
