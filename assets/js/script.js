@@ -229,8 +229,8 @@ function handleStep2() {
       const cardDiv = document.createElement("div");
 
       cardDiv.innerHTML = `
-        <p>${name} will receive: ${gift}</p>
-        <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+      <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+      <p>${name} will receive: ${gift}</p>
       `;
 
       pairDiv.appendChild(cardDiv);

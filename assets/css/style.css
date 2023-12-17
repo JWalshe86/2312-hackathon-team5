@@ -110,6 +110,8 @@
   display: block;
   margin: 10px auto;
   border-radius: 10px;
+  float: left;
+  padding-right: 20px;
 }
 
 /* Background Image section */
