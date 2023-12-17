@@ -135,6 +135,10 @@ h1 {
   font-family: "Mountains of Christmas", serif;
 }
 
+h2, h3, h4, h5, h6 {
+  font-family: "Mountains of Christmas", serif;
+}
+
 .color-overlay {
   position: absolute;
   width: 100%;
