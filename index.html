@@ -61,17 +61,18 @@
           </button>
         </div>
         <!-- Form Section -->
+        <div class="progress mb-3" id="progress-bar">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 33%" aria-valuenow="33"
+            aria-valuemin="0" aria-valuemax="100">
+            Step 1
+          </div>
+        </div>
         <div class="container mt-4">
           <!-- Instructions Content (Initially Hidden) -->
           <div id="instructionsContent" class="container text-center hide">
             <p>Here are the instructions...</p>
           </div>
-          <div class="progress mb-3" id="progress-bar">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 33%" aria-valuenow="33"
-              aria-valuemin="0" aria-valuemax="100">
-              Step 1
-            </div>
-          </div>
+          
           <form class="text-center" id="name-form">
             <!-- Name input form -->
             <div id="form-group">
@@ -95,13 +96,11 @@
             </button>
 
             <!-- Hidden gift-interface -->
-            <div class="giftInterfaceContainer">
               <div id="gift-interface" class="gift-interface hidden">
                 <!-- Gift description -->
                 <p id="gift-message"></p>
                 <!-- Next button -->
               </div>
-            </div>
               <button onclick="nextStep()" type="submit" class="btn btn-success" id="next-button">
                 Next
               </button>

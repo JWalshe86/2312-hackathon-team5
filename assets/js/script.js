@@ -108,7 +108,6 @@ function collectNames() {
         names.push(trimmedName);
       }
     });
-  console.log(names);
 }
 
 // Function for showing/hiding instructions
@@ -221,16 +220,15 @@ function handleStep2() {
   // Display gifts for each pair
   for (const pair in namePairs) {
     const pairDiv = document.createElement("div");
-    pairDiv.innerHTML = `<h3>${pair}</h3>`;
+    // pairDiv.innerHTML = `<h3>${pair}</h3>`;
 
     namePairs[pair].forEach((name) => {
       const gift = giftCollection[name];
       const giftImageUrl = images[gift] || "";
       const cardDiv = document.createElement("div");
-
       cardDiv.innerHTML = `
       <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
-      <p>${name} will receive: ${gift}</p>
+      <p>${names[0]} will give: ${names[1]} ${gift}</p>
       `;
 
       pairDiv.appendChild(cardDiv);
