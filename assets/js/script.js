@@ -49,6 +49,11 @@ function getRandomGift() {
   return gifts[Math.floor(Math.random() * gifts.length)];
 }
 
+// Function for checking the checkbox state
+function isCheckboxChecked() {
+  return multipleParticipantsCheckbox.checked;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
   //Add-name button listener
@@ -57,30 +62,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function for adding another name fields
   function addNameField() {
-    // Create a new div element for the input field
     const newInputDiv = document.createElement('div');
     newInputDiv.classList.add('mb-3');
-
-    // Create a new input field
     const newInput = document.createElement('input');
     newInput.type = 'text';
     newInput.id = `nameInput${nameFieldCount}`;
     newInput.classList.add('form-control');
-    newInput.placeholder = `Name #${nameFieldCount}`; // Add a tooltip
+    newInput.placeholder = `Name #${nameFieldCount}`;
 
-    // Add a new input field to the div
     newInputDiv.appendChild(newInput);
 
-    // Adding a div to the container
     formGroup.appendChild(newInputDiv);
 
-    //Increase the counter for the next field
     nameFieldCount++;
   }
 
   // Event handler for the checkbox
   multipleParticipantsCheckbox.addEventListener('change', function () {
-    if (this.checked) {
+    if (isCheckboxChecked()) {
       addNameButton.classList.remove("d-none");
     } else {
       addNameButton.classList.add("d-none");
@@ -94,8 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("submit", function (event) {
       event.preventDefault();
       addNameButton.classList.remove("hidden");
-
-      // Clears the name input value so as to not repeat default behaviour
       nameInput.value = "";
     });
 });
@@ -171,24 +168,19 @@ function nextStep() {
   }
 }
 
+// Function handling 1-st step on the progress bar
 function handleStep1() {
- // Checks if username is entered
   const userInputValue = nameInput.value.trim();
   if (userInputValue === "") {
     alert("Please enter a name.");
     return;
   }
 
-   // Handles the number for the width
   const nextWidth = (currentStep / totalSteps) * 100;
 
-   // Calls function to increase progress bar
   updateProgressBar(nextWidth);
-
-  // Collects names and assigns gifts
   collectNames();
   assignGiftsToNames();
-
   nextStep();
 }
 
@@ -200,8 +192,8 @@ function updateProgressBar(width) {
   progressBarElement.textContent = `Step ${currentStep}`;
 }
 
+// Function handling 2-nd step on the progress bar
 function handleStep2() {
-  // Hides form elements and buttons to transition to the second step
   formGroup.style.display = "none";
   instructionsButton.style.display = "none";
   participantsCheckbox.style.display = "none";
@@ -245,9 +237,8 @@ function handleStep2() {
   }
 }
 
-// The interface on "Step 3"
+// Function handling 3-d step on the progress bar
 function handleStep3() {
-  // Remove the required attribute from all input fields
   document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
     input.removeAttribute('required');
   });
@@ -273,8 +264,6 @@ function handleStep3() {
     `;
     step3Interface.appendChild(cardDiv);
   }
-
-  // Добавляем созданный интерфейс в DOM
   document.body.appendChild(step3Interface);
 }
 
@@ -294,7 +283,7 @@ document.addEventListener('mousemove', e => {
 })
 
 document.addEventListener('click', () => {
-    cursor.classList.add("expand");
+    cursor.classList.add("expand")
 
     setTimeout(() => {
         cursor.classList.remove("expand");
