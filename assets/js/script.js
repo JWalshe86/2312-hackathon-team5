@@ -99,13 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function for adding names to the array
 function collectNames() {
-  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
-    const trimmedName = input.value.trim();
-    if (trimmedName !== '') {
-      names.push(trimmedName);
-    }
-  });
-  console.log(names);
+  document
+    .querySelectorAll('#form-group input[type="text"]')
+    .forEach((input) => {
+      const trimmedName = input.value.trim();
+      if (trimmedName !== "") {
+        names.push(trimmedName);
+      }
+    });
 }
 
 // Function for showing/hiding instructions
@@ -137,7 +138,7 @@ function createNamePairs() {
     names.push("Unknown");
   }
 
-  for (let i = 0; i < names.length; i += 2) {
+  for (let i = 0; i < 1; i++) {
     pairs[`Pair ${pairIndex}`] = [names[i], names[i + 1]];
     pairIndex++;
   }
@@ -205,37 +206,64 @@ function handleStep2() {
 
   // Collect names and assign random gifts to each name
   collectNames();
-  assignGiftsToNames();
 
-  // If there is only one name in the names array, show its gift
-  if (names.length === 1) {
-    const singleName = names[0];
-    const gift = giftCollection[singleName];
-    const giftImageUrl = images[gift] || "";
-    const singleGiftDiv = document.createElement('div');
-    singleGiftDiv.innerHTML = `
-      <p>${singleName} will receive: ${gift}</p>
-      <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
-    `;
-    giftInterface.appendChild(singleGiftDiv);
-  } else {
-    // Otherwise, show gifts for all couples
-    const namePairs = createNamePairs();
+  const namePairs = createNamePairs();
+  console.log(namePairs);
 
-    for (const pair in namePairs) {
-      const pairDiv = document.createElement('div');
-      pairDiv.innerHTML = `<h3>${pair}</h3>`;
+  // Assign random gifts to each name
+  names.forEach((name) => {
+    giftCollection[name] = getRandomGift();
+  });
 
-      namePairs[pair].forEach(name => {
-        const gift = giftCollection[name];
-        const giftImageUrl = images[gift] || "";
-        const cardDiv = document.createElement('div');
-        cardDiv.innerHTML = `
-          <p>${name} will receive: ${gift}</p>
-          <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+  console.log(giftCollection);
+
+  // Display gifts for each pair
+  for (const pair in namePairs) {
+    const pairDiv = document.createElement("div");
+    // pairDiv.innerHTML = `<h3>${pair}</h3>`;
+
+    namePairs[pair].forEach((name) => {
+      const gift = giftCollection[name];
+      const giftImageUrl = images[gift] || "";
+      const cardDiv = document.createElement("div");
+
+      console.log(names);
+
+      // Function to shuffle array
+const shuffle = (arr) => {
+  for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+const randomNames = shuffle(names);
+
+// Match each person with the next one, folding over at the end
+const matches = randomNames.map((name, index) => {
+return {
+  santa: name,
+  receiver: randomNames[index + 1] || randomNames[0],
+}
+});
+
+
+dataArray = matches.map(function(e){
+  return JSON.stringify(e);
+});
+
+dataString = dataArray.join(",");
+console.log(dataString);
+    
+          cardDiv.innerHTML = `
+        <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+        <p>${dataString} ${gift}</p>
         `;
-        pairDiv.appendChild(cardDiv);
-      });
+      
+
+      pairDiv.appendChild(cardDiv);
+    });
 
       giftInterface.appendChild(pairDiv);
     }
