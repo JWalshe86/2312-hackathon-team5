@@ -139,7 +139,7 @@ function createNamePairs() {
     names.push("Unknown");
   }
 
-  for (let i = 0; i < names.length; i += 2) {
+  for (let i = 0; i < 1; i++) {
     pairs[`Pair ${pairIndex}`] = [names[i], names[i + 1]];
     pairIndex++;
   }
@@ -226,10 +226,41 @@ function handleStep2() {
       const gift = giftCollection[name];
       const giftImageUrl = images[gift] || "";
       const cardDiv = document.createElement("div");
-      cardDiv.innerHTML = `
-      <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
-      <p>${names[0]} will give: ${names[1]} ${gift}</p>
-      `;
+
+      console.log(names);
+
+      // Function to shuffle array
+const shuffle = (arr) => {
+  for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+const randomNames = shuffle(names);
+
+// Match each person with the next one, folding over at the end
+const matches = randomNames.map((name, index) => {
+return {
+  santa: name,
+  receiver: randomNames[index + 1] || randomNames[0],
+}
+});
+
+
+dataArray = matches.map(function(e){
+  return JSON.stringify(e);
+});
+
+dataString = dataArray.join(",");
+console.log(dataString);
+    
+          cardDiv.innerHTML = `
+        <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+        <p>${dataString} ${gift}</p>
+        `;
+      
 
       pairDiv.appendChild(cardDiv);
     });
