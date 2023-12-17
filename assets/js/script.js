@@ -28,6 +28,7 @@ const images = {
 
 let currentStep = 1;
 const instructionsButton = document.getElementById("instructionsToggle");
+const instructionsContent = document.getElementById("instructionsContent");
 const progressBar = document.getElementById("progress-bar");
 const participantsCheckbox = document.getElementById("participants-checkbox");
 const formGroup = document.getElementById("form-group");
@@ -36,45 +37,52 @@ const giftInterface = document.getElementById("gift-interface");
 const giftMessage = document.getElementById("gift-message");
 const nextButton = document.getElementById("next-button");
 const giftImage = document.getElementById("gift-image");
+const addNameButton = document.getElementById("add-name");
+const nameInput = document.getElementById("nameInput");
+const multipleParticipantsCheckbox = document.getElementById('multipleParticipantsCheckbox');
+
+const names = []; // Stores the names of the participants
+const giftCollection = {}; // Stores the name and gift pairs name: gift
+
+// Function for receiving a random gift
+function getRandomGift() {
+  return gifts[Math.floor(Math.random() * gifts.length)];
+}
+
+// Function for checking the checkbox state
+function isCheckboxChecked() {
+  return multipleParticipantsCheckbox.checked;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Add add-name button listener
-  document.getElementById('add-name').addEventListener('click', addNameField);
+  //Add-name button listener
+  addNameButton.addEventListener('click', addNameField);
   let nameFieldCount = 2;
 
+  // Function for adding another name fields
   function addNameField() {
-    const nameInputsContainer = document.getElementById('form-group');// Container for input fields
-
-    // Create a new div element for the input field
     const newInputDiv = document.createElement('div');
-    newInputDiv.classList.add('mb-3'); // Добавление отступа
-
-    // Create a new input field
+    newInputDiv.classList.add('mb-3');
     const newInput = document.createElement('input');
     newInput.type = 'text';
     newInput.id = `nameInput${nameFieldCount}`;
     newInput.classList.add('form-control');
-    newInput.placeholder = `Name #${nameFieldCount}`; // Add a tooltip
+    newInput.placeholder = `Name #${nameFieldCount}`;
 
-    // Add a new input field to the div
     newInputDiv.appendChild(newInput);
 
-    // Adding a div to the container
-    nameInputsContainer.appendChild(newInputDiv);
+    formGroup.appendChild(newInputDiv);
 
-    //Increase the counter for the next field
     nameFieldCount++;
   }
 
   // Event handler for the checkbox
-  document.getElementById('multipleParticipantsCheckbox').addEventListener('change', function () {
-    if (this.checked) {
-      // Show the button
-      document.getElementById("add-name").classList.remove("d-none");
+  multipleParticipantsCheckbox.addEventListener('change', function () {
+    if (isCheckboxChecked()) {
+      addNameButton.classList.remove("d-none");
     } else {
-      // Hide the button
-      document.getElementById("add-name").classList.add("d-none");
+      addNameButton.classList.add("d-none");
       removeAdditionalNameFields();
     }
   });
@@ -84,64 +92,96 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("name-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
-      document.getElementById("add-name").classList.remove("hidden");
-
-      // Name input from user
-      const nameInput = document.getElementById("nameInput");
-      const name = nameInput.value;
-
-      // Clears the name input value so as to not repeat default behaviour
+      addNameButton.classList.remove("hidden");
       nameInput.value = "";
     });
-
-  // Function for showing/hiding instructions
-  const instructionsButton = document.getElementById("instructionsToggle");
-  const instructionsContent = document.getElementById("instructionsContent");
-
-  instructionsButton.addEventListener("click", () => {
-    instructionsContent.classList.toggle("hide");
-    instructionsButton.textContent = instructionsContent.classList.contains(
-      "hide"
-    )
-      ? "Show Instructions"
-      : "Hide Instructions";
-  });
 });
 
+// Function for adding names to the array
+function collectNames() {
+  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
+    const trimmedName = input.value.trim();
+    if (trimmedName !== '') {
+      names.push(trimmedName);
+    }
+  });
+  console.log(names);
+}
+
+// Function for showing/hiding instructions
+instructionsButton.addEventListener("click", () => {
+  instructionsContent.classList.toggle("hide");
+  instructionsButton.textContent = instructionsContent.classList.contains(
+    "hide"
+  )
+    ? "Show Instructions"
+    : "Hide Instructions";
+});
+
+// Function for assigning gifts to names
+function assignGiftsToNames() {
+  names.forEach(name => {
+    if (name.trim() !== '') {
+      const randomGift = getRandomGift();
+      giftCollection[name.trim()] = randomGift;
+    }
+  });
+}
+
+// Function for creating pairs of names
+function createNamePairs() {
+  const pairs = {};
+  let pairIndex = 1;
+
+  if (names.length % 2 !== 0) {
+    names.push("Unknown");
+  }
+
+  for (let i = 0; i < names.length; i += 2) {
+    pairs[`Pair ${pairIndex}`] = [names[i], names[i + 1]];
+    pairIndex++;
+  }
+
+  return pairs;
+}
+
+// Function for handling the all steps
 function nextStep() {
   const totalSteps = 3;
-  // Takes name value to pass down function
-  const userInput = document.getElementById("nameInput").value.trim();
+  currentStep++;
 
-  // Validates any empty fields
-  if (currentStep === 1 && userInput === "") {
+  if (currentStep > totalSteps) {
+    return;
+  }
+  updateProgressBar((currentStep / totalSteps) * 100);
+
+  // Process the transition to the next step
+  switch (currentStep) {
+    case 2:
+      handleStep2();
+      break;
+    case 3:
+      handleStep3();
+      break;
+    default:
+      break;
+  }
+}
+
+// Function handling 1-st step on the progress bar
+function handleStep1() {
+  const userInputValue = nameInput.value.trim();
+  if (userInputValue === "") {
     alert("Please enter a name.");
     return;
   }
 
-  // Stops step count going beyond "Step 3"
-  if (currentStep === 3) {
-    return;
-  }
-
-  // Math function to randomly generate gift
-  const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
-  console.log(randomGift);
-
-  // Increments the progress bar steps +1
-  currentStep++;
-
-  // Handles the number for the width
   const nextWidth = (currentStep / totalSteps) * 100;
 
-  // Calls function to increase progress bar
   updateProgressBar(nextWidth);
-
-  if (currentStep === 2) {
-    handleStep2(userInput, randomGift);
-  } else if (currentStep === 3) {
-    handleStep3(userInput);
-  }
+  collectNames();
+  assignGiftsToNames();
+  nextStep();
 }
 
 // Progress bar element update function
@@ -152,41 +192,79 @@ function updateProgressBar(width) {
   progressBarElement.textContent = `Step ${currentStep}`;
 }
 
+// Function handling 2-nd step on the progress bar
 function handleStep2() {
   formGroup.style.display = "none";
   instructionsButton.style.display = "none";
   participantsCheckbox.style.display = "none";
   submitButton.style.display = "none";
+  addNameButton.style.display = "none";
 
+  // Displays the gift interface
   giftInterface.style.display = "block";
 
-  const names = [];
-  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
-    if (input.value.trim() !== '') {
-      names.push(input.value.trim());
-    }
+  collectNames();
+
+  const namePairs = createNamePairs();
+  console.log(namePairs);
+
+  // Assign random gifts to each name
+  names.forEach(name => {
+    giftCollection[name] = getRandomGift();
   });
 
-  names.forEach(name => {
-    const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
-    const giftImageUrl = images[randomGift] || "";
-    const cardDiv = document.createElement('div');
-    cardDiv.innerHTML = `
-      <h3>${name}</h3>
-      <p>Gift: ${randomGift}</p>
-      <img src="${giftImageUrl}" alt="${randomGift}" class="gift-image">
-    `;
-    giftInterface.appendChild(cardDiv);
-  });
+  console.log(giftCollection);
+
+  // Display gifts for each pair
+  for (const pair in namePairs) {
+    const pairDiv = document.createElement('div');
+    pairDiv.innerHTML = `<h3>${pair}</h3>`;
+
+    namePairs[pair].forEach(name => {
+      const gift = giftCollection[name];
+      const giftImageUrl = images[gift] || "";
+      const cardDiv = document.createElement('div');
+
+      cardDiv.innerHTML = `
+        <p>${name} will receive: ${gift}</p>
+        <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+      `;
+
+      pairDiv.appendChild(cardDiv);
+    });
+
+    giftInterface.appendChild(pairDiv);
+  }
 }
 
-// The interface on "Step 3"
+// Function handling 3-d step on the progress bar
 function handleStep3() {
+  document.querySelectorAll('#form-group input[type="text"]').forEach(input => {
+    input.removeAttribute('required');
+  });
+
   formGroup.style.display = "none";
-  giftImage.style.display = "none";
+  giftInterface.style.display = "none";
   nextButton.style.display = "none";
-  giftMessage.innerHTML = `Here you go! Here is your shopping voucher: 
-      <a href="./assets/images/voucher-template.png" target="_blank">Download Voucher</a>`;
+
+  // Create an interface for step 3
+  const step3Interface = document.createElement("div");
+
+  // Add information about gifts and a link to the voucher
+  for (const name in giftCollection) {
+    const gift = giftCollection[name];
+    const giftImageUrl = images[gift] || "";
+    const cardDiv = document.createElement('div');
+    cardDiv.innerHTML = `
+      <p>${name} will receive: ${gift}</p>
+      <img src="${giftImageUrl}" alt="${gift}" class="gift-image">
+      <p>Here is your shopping voucher: 
+        <a href="./assets/images/voucher-template.png" target="_blank">Download Voucher</a>
+      </p>
+    `;
+    step3Interface.appendChild(cardDiv);
+  }
+  document.body.appendChild(step3Interface);
 }
 
 // Snowfall effect
@@ -197,3 +275,17 @@ $(document).snowfall({
   minSpeed: 1,     // min speed of snowflake, 1 by default
   maxSpeed: 3      // max speed of snowflake, 5 by default
 });
+
+const cursor = document.querySelector('.cursor');
+
+document.addEventListener('mousemove', e => {
+    cursor.setAttribute("style", "top: "+(e.pageY - 10)+"px; left: "+(e.pageX - 10)+"px;")
+})
+
+document.addEventListener('click', () => {
+    cursor.classList.add("expand")
+
+    setTimeout(() => {
+        cursor.classList.remove("expand");
+    }, 500)
+})
