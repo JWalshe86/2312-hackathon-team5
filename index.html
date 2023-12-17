@@ -25,7 +25,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">
-        <img class="img-fluid navbar-icon-size" src="./assets/images/santa icon.png" />
+        <img class="img-fluid navbar-icon-size" alt="Cool Santa Icon wearing Shades" src="./assets/images/santa_icon.png" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,8 @@
           <form class="text-center" id="name-form">
             <!-- Name input form -->
             <div id="form-group">
-              <label for="title" class="mb-2">Name your victim...</label>
+              <!-- "keiron" branch: I removed the "for='title'" here for the HTML validator -->
+              <label class="mb-2">Name your victim...</label>
               <input type="text" id="nameInput" class="form-control mb-3" placeholder="Name #1" required />
             </div>
             <!-- Checkbox for multiple names -->
