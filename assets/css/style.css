@@ -82,6 +82,11 @@
 
 /* Instruction section */
 
+#instructionsContent {
+  margin-top: -35px;
+  font-size: 14px;
+}
+
 .hide {
   display: none;
 }
